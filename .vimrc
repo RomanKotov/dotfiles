@@ -17,3 +17,10 @@
 "=== Custom mappings
 " find visually selected text
 vnoremap // y/<C-R>"<CR>
+" Remap the leader to space
+let mapleader= " "
+" easier windows navigation
+map <leader>h :wincmd h<CR>
+map <leader>j :wincmd j<CR>
+map <leader>k :wincmd k<CR>
+map <leader>l :wincmd l<CR>
