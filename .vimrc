@@ -1,4 +1,4 @@
-"=== Styling section
+" Styling section
 :colorscheme koehler
 :set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v]\ [%p%%]\ [LEN=%L]
 :set laststatus=2
@@ -8,19 +8,46 @@
 
 
 
-"=== Editing section
+" Editing section
 :set incsearch
 :set hlsearch
 
 
 
-"=== Custom mappings
+" Custom mappings
 " find visually selected text
 vnoremap // y/<C-R>"<CR>
-" Remap the leader to space
 let mapleader= " "
-" easier windows navigation
 map <leader>h :wincmd h<CR>
 map <leader>j :wincmd j<CR>
 map <leader>k :wincmd k<CR>
 map <leader>l :wincmd l<CR>
+
+
+
+" Vundle section
+" Vundle settings
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+" Run :VundleInstall to install plugins inside vim
+
+" Vundle Plugins
+Plugin 'gmarik/vundle' " Vundle itself
+Plugin 'scrooloose/nerdtree.git' " File browsing
+Plugin 'Xuyuanp/nerdtree-git-plugin' " NERDTree browsing git integration
+Plugin 'airblade/vim-gitgutter' " Git diff show
+Plugin 'tpope/vim-fugitive' " Git integration
+
+" Theme settings
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+let g:airline_theme='powerlineish'
+set t_Co=256
+
+
+
+" Settings executed after Vundle is set up
+filetype plugin indent on
+syntax on " Syntax highlighting
