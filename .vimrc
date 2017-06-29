@@ -1,6 +1,5 @@
 " Styling section
 :colorscheme koehler
-:set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v]\ [%p%%]\ [LEN=%L]
 :set laststatus=2
 :set cursorline
 :set number
@@ -22,6 +21,7 @@ map <leader>h :wincmd h<CR>
 map <leader>j :wincmd j<CR>
 map <leader>k :wincmd k<CR>
 map <leader>l :wincmd l<CR>
+nmap <silent> <Leader>f :NERDTreeToggle<CR>
 
 
 
