@@ -36,6 +36,9 @@ Plugin 'Xuyuanp/nerdtree-git-plugin' " NERDTree browsing git integration
 Plugin 'airblade/vim-gitgutter' " Git diff show
 Plugin 'tpope/vim-fugitive' " Git integration
 Plugin 'tpope/vim-surround' " Easy surround
+Plugin 'sheerun/vim-polyglot' " Language support
+Plugin 'slashmili/alchemist.vim' " Elixir support
+Plugin 'elixir-editors/vim-elixir' " Elixir syntax support
 Plugin 'christoomey/vim-tmux-navigator' " Navigate tmux and vim splits
 let g:tmux_navigator_no_mappings = 0 " Use tmux-navigator mappings
 let g:tmux_navigator_disable_when_zoomed = 1 " Disable tmux navigation when vim is zoomed
