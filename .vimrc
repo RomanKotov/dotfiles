@@ -4,7 +4,6 @@
 :set cursorline
 :set number
 :set numberwidth=4
-:set completeopt=longest,menuone
 
 
 
@@ -19,6 +18,11 @@
 vnoremap // y/<C-R>"<CR>
 let mapleader= " "
 nmap <silent> <Leader>f :NERDTreeToggle<CR>
+" Completion updates
+imap <Tab> <C-P>
+set complete=.,b,u,]
+set wildmode=longest,list:longest
+set completeopt=longest,menuone,preview
 
 
 
