@@ -4,6 +4,7 @@
 :set cursorline
 :set number
 :set numberwidth=4
+:set completeopt=longest,menuone
 
 
 
