@@ -20,7 +20,9 @@ let mapleader= " "
 nmap <silent> <Leader>f :NERDTreeToggle<CR>
 " Completion updates
 imap <Tab> <C-P>
-set complete=.,b,u,]
+" . scan the current buffer, b scan other loaded buffers that are in the buffer list, u scan the unloaded buffers that 
+" are in the buffer list, w scan buffers from other windows, t tag completion
+set complete=.,b,u,w,t,]
 set wildmode=longest,list:longest
 set completeopt=longest,menuone,preview
 
