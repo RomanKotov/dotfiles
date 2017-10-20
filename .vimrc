@@ -1,15 +1,15 @@
 " Styling section
-:colorscheme koehler
-:set laststatus=2
-:set cursorline
-:set number
-:set numberwidth=4
+colorscheme koehler
+set laststatus=2
+set cursorline
+set number
+set numberwidth=4
 
 
 
 " Editing section
-:set incsearch
-:set hlsearch
+set incsearch
+set hlsearch
 
 
 
@@ -18,13 +18,6 @@
 vnoremap // y/<C-R>"<CR>
 let mapleader= " "
 nmap <silent> <Leader>f :NERDTreeToggle<CR>
-" Completion updates
-imap <Tab> <C-P>
-" . scan the current buffer, b scan other loaded buffers that are in the buffer list, u scan the unloaded buffers that 
-" are in the buffer list, w scan buffers from other windows, t tag completion
-set complete=.,b,u,w,t,]
-set wildmode=longest,list:longest
-set completeopt=longest,menuone,preview
 
 
 
@@ -53,6 +46,7 @@ let g:tmux_navigator_disable_when_zoomed = 1 " Disable tmux navigation when vim 
 " Theme settings
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+set encoding=utf-8
 let g:airline_theme='powerlineish'
 set t_Co=256
 
@@ -61,3 +55,4 @@ set t_Co=256
 " Settings executed after Vundle is set up
 filetype plugin indent on
 syntax on " Syntax highlighting
+set showcmd " show commands
