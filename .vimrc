@@ -40,6 +40,7 @@ Plugin 'sheerun/vim-polyglot' " Language support
 Plugin 'slashmili/alchemist.vim' " Elixir support
 Plugin 'elixir-editors/vim-elixir' " Elixir syntax support
 Plugin 'christoomey/vim-tmux-navigator' " Navigate tmux and vim splits
+Plugin 'tpope/vim-unimpaired.git' " Navigation mapping
 let g:tmux_navigator_no_mappings = 0 " Use tmux-navigator mappings
 let g:tmux_navigator_disable_when_zoomed = 1 " Disable tmux navigation when vim is zoomed
 
@@ -55,4 +56,4 @@ set t_Co=256
 " Settings executed after Vundle is set up
 filetype plugin indent on
 syntax on " Syntax highlighting
-set showcmd " show commands
+set showcmd
