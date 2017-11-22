@@ -31,7 +31,7 @@ call vundle#rc()
 
 " Vundle Plugins
 Plugin 'gmarik/vundle' " Vundle itself
-Plugin 'scrooloose/nerdtree.git' " File browsing
+"Plugin 'scrooloose/nerdtree.git' " File browsing
 Plugin 'Xuyuanp/nerdtree-git-plugin' " NERDTree browsing git integration
 Plugin 'airblade/vim-gitgutter' " Git diff show
 Plugin 'tpope/vim-fugitive' " Git integration
@@ -40,11 +40,14 @@ Plugin 'sheerun/vim-polyglot' " Language support
 Plugin 'slashmili/alchemist.vim' " Elixir support
 Plugin 'elixir-editors/vim-elixir' " Elixir syntax support
 Plugin 'christoomey/vim-tmux-navigator' " Navigate tmux and vim splits
-Plugin 'editorconfig/editorconfig-vim' " EditorConfig support
 Plugin 'tpope/vim-unimpaired.git' " Navigation mapping
+Plugin 'mileszs/ack.vim' " Searching
 let g:tmux_navigator_no_mappings = 0 " Use tmux-navigator mappings
 let g:tmux_navigator_disable_when_zoomed = 1 " Disable tmux navigation when vim is zoomed
-let g:EditorConfig_exclude_patterns = ['fugitive://.*'] " Disable EditorConfig for fugitive
+
+if executable('ag') " use ag for ack.vim
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 " Theme settings
 Plugin 'vim-airline/vim-airline'
@@ -59,4 +62,3 @@ set t_Co=256
 filetype plugin indent on
 syntax on " Syntax highlighting
 set showcmd
-
