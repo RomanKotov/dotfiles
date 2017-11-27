@@ -21,6 +21,11 @@ nmap <silent> <Leader>f :NERDTreeToggle<CR>
 
 
 
+" Add matchit plugin
+packadd! matchit
+
+
+
 " Vundle section
 " Vundle settings
 set nocompatible
@@ -31,7 +36,7 @@ call vundle#rc()
 
 " Vundle Plugins
 Plugin 'gmarik/vundle' " Vundle itself
-"Plugin 'scrooloose/nerdtree.git' " File browsing
+Plugin 'scrooloose/nerdtree.git' " File browsing
 Plugin 'Xuyuanp/nerdtree-git-plugin' " NERDTree browsing git integration
 Plugin 'airblade/vim-gitgutter' " Git diff show
 Plugin 'tpope/vim-fugitive' " Git integration
