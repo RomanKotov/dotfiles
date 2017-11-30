@@ -47,8 +47,10 @@ Plugin 'elixir-editors/vim-elixir' " Elixir syntax support
 Plugin 'christoomey/vim-tmux-navigator' " Navigate tmux and vim splits
 Plugin 'tpope/vim-unimpaired.git' " Navigation mapping
 Plugin 'mileszs/ack.vim' " Searching
+Plugin 'editorconfig/editorconfig-vim' " EditorConfig support
 let g:tmux_navigator_no_mappings = 0 " Use tmux-navigator mappings
 let g:tmux_navigator_disable_when_zoomed = 1 " Disable tmux navigation when vim is zoomed
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
 if executable('ag') " use ag for ack.vim
   let g:ackprg = 'ag --vimgrep'
