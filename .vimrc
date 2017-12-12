@@ -48,8 +48,9 @@ Plugin 'christoomey/vim-tmux-navigator' " Navigate tmux and vim splits
 Plugin 'tpope/vim-unimpaired.git' " Navigation mapping
 Plugin 'mileszs/ack.vim' " Searching
 Plugin 'editorconfig/editorconfig-vim' " EditorConfig support
-Plugin 'tpope/vim-tbone' " Tmux interop
-Plugin 'tpope/vim-dispatch' " Async tasks
+Plugin 'tpope/vim-tbone' " Tmux bindings
+Plugin 'tpope/vim-dispatch' " Dispatch commands to tmux buffer
+Plugin 'nelstrom/vim-visual-star-search' " Searches visual selection
 let g:tmux_navigator_no_mappings = 0 " Use tmux-navigator mappings
 let g:tmux_navigator_disable_when_zoomed = 1 " Disable tmux navigation when vim is zoomed
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
