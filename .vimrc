@@ -14,8 +14,6 @@ set hlsearch
 
 
 " Custom mappings
-" find visually selected text
-vnoremap // y/<C-R>"<CR>
 let mapleader= " "
 nmap <silent> <Leader>f :NERDTreeToggle<CR>
 
@@ -51,6 +49,8 @@ Plugin 'editorconfig/editorconfig-vim' " EditorConfig support
 Plugin 'tpope/vim-tbone' " Tmux bindings
 Plugin 'tpope/vim-dispatch' " Dispatch commands to tmux buffer
 Plugin 'nelstrom/vim-visual-star-search' " Searches visual selection
+Plugin 'kana/vim-textobj-user' " User defined text objects (for kana-textobj-lastpat)
+Plugin 'kana/vim-textobj-lastpat' " Highlighted search as a text object
 let g:tmux_navigator_no_mappings = 0 " Use tmux-navigator mappings
 let g:tmux_navigator_disable_when_zoomed = 1 " Disable tmux navigation when vim is zoomed
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
