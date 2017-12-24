@@ -44,19 +44,20 @@ function! UserInit()
 
   " Install personal plugins
   " Plug 'hecal3/vim-leader-guide'
-    Plug 'kana/vim-textobj-user' " User defined text objects (for kana-textobj-lastpat)
-    Plug 'kana/vim-textobj-lastpat' " Highlighted search as a text object
-    Plug 'kana/vim-textobj-entire' " entire buffer text object
-    Plug 'tpope/vim-abolish' " Improved substitution
-    Plug 'nelstrom/vim-visual-star-search' " Searches visual selection
+  Plug 'kana/vim-textobj-user' " User defined text objects (for kana-textobj-lastpat)
+  Plug 'kana/vim-textobj-lastpat' " Highlighted search as a text object
+  Plug 'kana/vim-textobj-entire' " entire buffer text object
+  Plug 'tpope/vim-abolish' " Improved substitution
+  Plug 'nelstrom/vim-visual-star-search' " Searches visual selection
+  Plug 'tpope/vim-dispatch' " Dispatch commands to tmux buffer
 
-    function! Multiple_cursors_before()
-      let b:deoplete_disable_auto_complete = 1
-    endfunction
+  function! Multiple_cursors_before()
+    let b:deoplete_disable_auto_complete = 1
+  endfunction
 
-    function! Multiple_cursors_after()
-      let b:deoplete_disable_auto_complete = 0
-    endfunction
+  function! Multiple_cursors_after()
+    let b:deoplete_disable_auto_complete = 0
+  endfunction
 
 endfunction
 
