@@ -51,6 +51,8 @@ function! UserInit()
   Plug 'nelstrom/vim-visual-star-search' " Searches visual selection
   Plug 'tpope/vim-dispatch' " Dispatch commands to tmux buffer
 
+  let g:tmux_navigator_disable_when_zoomed = 1 " Disable tmux navigation when vim is zoomed
+
   function! Multiple_cursors_before()
     let b:deoplete_disable_auto_complete = 1
   endfunction
