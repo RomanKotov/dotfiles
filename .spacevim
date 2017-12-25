@@ -15,6 +15,7 @@ function! Layers()
   Layer 'tmux'
   Layer 'git'
   Layer 'syntax-checking'
+  Layer 'auto-completion'
   Layer 'deoplete'
   Layer 'text-align'
   Layer 'ctrlp'
@@ -52,16 +53,6 @@ function! UserInit()
   Plug 'tpope/vim-dispatch' " Dispatch commands to tmux buffer
   Plug 'zchee/deoplete-jedi' " Python completion
 
-  let g:tmux_navigator_disable_when_zoomed = 1 " Disable tmux navigation when vim is zoomed
-
-  function! Multiple_cursors_before()
-    let b:deoplete_disable_auto_complete = 1
-  endfunction
-
-  function! Multiple_cursors_after()
-    let b:deoplete_disable_auto_complete = 0
-  endfunction
-
 endfunction
 
 " Override the default settings as well as adding extras
@@ -79,5 +70,20 @@ function! UserConfig()
       let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
     endif
   endif
+
+  " Python completion
+  let g:pymode_rope = 1
+  let g:pymode_rope_goto_definition_bind = '<C-]>'
+  let g:pymode_rope_goto_definition_cmd = 'e'
+
+  let g:tmux_navigator_disable_when_zoomed = 1 " Disable tmux navigation when vim is zoomed
+
+  function! Multiple_cursors_before()
+    let b:deoplete_disable_auto_complete = 1
+  endfunction
+
+  function! Multiple_cursors_after()
+    let b:deoplete_disable_auto_complete = 0
+  endfunction
 
 endfunction
