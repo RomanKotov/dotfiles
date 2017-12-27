@@ -10,6 +10,8 @@ set numberwidth=4
 " Editing section
 set incsearch
 set hlsearch
+set ignorecase
+set infercase
 
 
 

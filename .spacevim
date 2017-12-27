@@ -71,6 +71,8 @@ function! UserConfig()
     endif
   endif
 
+  set infercase
+
   " Python completion
   let g:pymode_rope = 1
   let g:pymode_rope_goto_definition_bind = '<C-]>'
