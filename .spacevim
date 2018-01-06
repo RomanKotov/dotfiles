@@ -19,6 +19,7 @@ function! Layers()
   Layer 'deoplete'
   Layer 'text-align'
   Layer 'ctrlp'
+  Layer 'which-key'
 
   " Languages
   Layer 'elixir'
