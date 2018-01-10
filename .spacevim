@@ -45,7 +45,6 @@ function! UserInit()
   let g:spacevim_localleader = '\'
 
   " Install personal plugins
-  " Plug 'hecal3/vim-leader-guide'
   Plug 'kana/vim-textobj-user' " User defined text objects (for kana-textobj-lastpat)
   Plug 'kana/vim-textobj-lastpat' " Highlighted search as a text object
   Plug 'kana/vim-textobj-entire' " entire buffer text object
@@ -53,6 +52,7 @@ function! UserInit()
   Plug 'nelstrom/vim-visual-star-search' " Searches visual selection
   Plug 'tpope/vim-dispatch' " Dispatch commands to tmux buffer
   Plug 'zchee/deoplete-jedi' " Python completion
+  Plug 'tpope/vim-repeat' " Repeat surround action
 
 endfunction
 
