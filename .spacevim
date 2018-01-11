@@ -80,6 +80,12 @@ function! UserConfig()
   let g:pymode_rope_goto_definition_cmd = 'e'
   let g:pymode_rope_regenerate_on_write = 0
 
+  " Typescript settings
+  let g:tsuquyomi_single_quote_import = 1
+
+  " Editorconfig settings
+  let g:EditorConfig_core_mode = 'external_command'
+
   let g:tmux_navigator_disable_when_zoomed = 1 " Disable tmux navigation when vim is zoomed
 
   function! Multiple_cursors_before()
