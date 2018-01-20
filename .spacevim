@@ -85,6 +85,19 @@ function! UserConfig()
 
   let g:tmux_navigator_disable_when_zoomed = 1 " Disable tmux navigation when vim is zoomed
 
+  " Elixir linter code reload fix
+  augroup AleGroup
+    autocmd!
+    autocmd User ALELint call TouchOpenFile()
+  augroup END
+
+  func! TouchOpenFile()
+    let g:ale_enabled = 0
+    sleep 500m
+    w
+    let g:ale_enabled = 1
+  endfunc
+
   function! Multiple_cursors_before()
     let b:deoplete_disable_auto_complete = 1
   endfunction
