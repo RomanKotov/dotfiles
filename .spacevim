@@ -6,29 +6,34 @@ let g:spacevim_plug_home = '~/.vim/plugged'
 function! Layers()
 
   " Default layers
-  Layer 'fzf'
-  Layer 'unite'
-  Layer 'better-defaults'
-  Layer 'file-manager'
-  Layer 'editing'
-  Layer 'programming'
-  Layer 'tmux'
-  Layer 'git'
-  Layer 'syntax-checking'
   Layer 'auto-completion'
-  Layer 'deoplete'
-  Layer 'text-align'
+  Layer 'better-motion'
+  Layer 'better-defaults'
+  Layer 'code-snippets'
   Layer 'ctrlp'
+  Layer 'deoplete'
+  Layer 'editing'
+  Layer 'file-manager'
+  Layer 'fzf'
+  Layer 'git'
+  Layer 'programming'
+  Layer 'syntax-checking'
+  Layer 'text-align'
+  Layer 'tmux'
+  Layer 'unite'
   Layer 'which-key'
 
   " Languages
+  Layer 'clojure'
+  Layer 'docker'
   Layer 'elixir'
-  Layer 'ruby'
-  Layer 'markdown'
   Layer 'erlang'
   Layer 'html'
+  Layer 'java'
   Layer 'javascript'
+  Layer 'markdown'
   Layer 'python'
+  Layer 'ruby'
   Layer 'typescript'
 
 endfunction
@@ -42,17 +47,18 @@ function! UserInit()
 
   " The default local leader key is comma.
   " Uncomment the line below and modify ',' if you prefer another
+  " let g:spacevim_localleader = ','
   let g:spacevim_localleader = '\'
 
   " Install personal plugins
-  Plug 'kana/vim-textobj-user' " User defined text objects (for kana-textobj-lastpat)
-  Plug 'kana/vim-textobj-lastpat' " Highlighted search as a text object
   Plug 'kana/vim-textobj-entire' " entire buffer text object
-  Plug 'tpope/vim-abolish' " Improved substitution
+  Plug 'kana/vim-textobj-lastpat' " Highlighted search as a text object
+  Plug 'kana/vim-textobj-user' " User defined text objects (for kana-textobj-lastpat)
   Plug 'nelstrom/vim-visual-star-search' " Searches visual selection
+  Plug 'tpope/vim-abolish' " Improved substitution
   Plug 'tpope/vim-dispatch' " Dispatch commands to tmux buffer
-  Plug 'zchee/deoplete-jedi' " Python completion
   Plug 'tpope/vim-repeat' " Repeat surround action
+  Plug 'zchee/deoplete-jedi' " Python completion
 
 endfunction
 
@@ -84,19 +90,6 @@ function! UserConfig()
   let g:tsuquyomi_single_quote_import = 1
 
   let g:tmux_navigator_disable_when_zoomed = 1 " Disable tmux navigation when vim is zoomed
-
-  " Elixir linter code reload fix
-  augroup AleGroup
-    autocmd!
-    autocmd User ALELint call TouchOpenFile()
-  augroup END
-
-  func! TouchOpenFile()
-    let g:ale_enabled = 0
-    sleep 500m
-    w
-    let g:ale_enabled = 1
-  endfunc
 
   " Faster add line
   inoremap <M-o> <C-o>o
