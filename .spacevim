@@ -22,6 +22,7 @@ function! Layers()
   Layer 'tmux'
   Layer 'unite'
   Layer 'which-key'
+  Layer 'airline'
 
   " Languages
   Layer 'clojure'
@@ -102,5 +103,8 @@ function! UserConfig()
   function! Multiple_cursors_after()
     let b:deoplete_disable_auto_complete = 0
   endfunction
+
+  " Airline theme
+  let g:airline_theme='luna'
 
 endfunction
