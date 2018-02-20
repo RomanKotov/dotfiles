@@ -1,6 +1,7 @@
 " Let Vim and NeoVim shares the same plugin directory.
 " Comment it out if you don't like
 let g:spacevim_plug_home = '~/.vim/plugged'
+let g:spacevim_localleader = '\'
 
 " Enable the existing layers in space-vim
 function! Layers()
@@ -49,7 +50,6 @@ function! UserInit()
   " The default local leader key is comma.
   " Uncomment the line below and modify ',' if you prefer another
   " let g:spacevim_localleader = ','
-  let g:spacevim_localleader = '\'
 
   " Install personal plugins
   Plug 'kana/vim-textobj-entire' " entire buffer text object
