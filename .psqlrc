@@ -1,0 +1,23 @@
+-- Disable verbosity on init
+\set QUIET 1
+
+-- Styling section
+\pset null '¤'
+\pset linestyle unicode
+\pset border 2
+
+-- Prompt configuration
+\set PROMPT1 '[%n@%M] [%/] # '
+\set PROMPT2 '[more] %R > '
+
+-- Timing for queries
+\timing
+
+-- Auto format results
+\x auto
+
+\set VERBOSITY verbose
+\set HISTFILE ~/.psql_history- :DBNAME
+\set HISTCONTROL ignoredups
+\set COMP_KEYWORD_CASE upper
+\unset QUIET
