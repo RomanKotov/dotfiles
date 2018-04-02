@@ -38,6 +38,7 @@ function! Layers()
   Layer 'python'
   Layer 'ruby'
   Layer 'typescript'
+  Layer 'vue'
 
 endfunction
 
