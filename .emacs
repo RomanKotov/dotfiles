@@ -19,22 +19,39 @@
 (el-get-bundle which-key)
 (el-get-bundle switch-window)
 (el-get-bundle multi-term)
+(el-get-bundle magit)
+(el-get-bundle git-gutter)
+(el-get-bundle neotree)
+(el-get-bundle evil-surround)
+(el-get-bundle evil-visualstar)
+(el-get-bundle evil-numbers)
+
 
 ;; Evil configuration
 (require 'evil)
 (evil-mode 1)
+(global-evil-visualstar-mode)
+
+;; Git gutter configuration
+(global-git-gutter-mode +1)
 
 ;; Helm configuration
 (require 'helm)
 (helm-mode 1)
 
+;; Neotree configuration
+(require 'neotree)
+(global-set-key [f4] 'neotree-toggle)
+(evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
+(evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
+(evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+(evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+
 ;; Which-key configuration
 (require 'which-key)
 (which-key-mode)
 
-
 ;; Switch-window configuration
-
 (require 'switch-window)
 (global-set-key (kbd "C-x o") 'switch-window)
 (global-set-key (kbd "C-x 1") 'switch-window-then-maximize)
@@ -54,15 +71,15 @@
 
 (makunbound 'switch-window-extra-map)
 (defcustom switch-window-extra-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "k") 'switch-window-mvborder-up)
-    (define-key map (kbd "j") 'switch-window-mvborder-down)
-    (define-key map (kbd "h") 'switch-window-mvborder-left)
-    (define-key map (kbd "l") 'switch-window-mvborder-right)
-    (define-key map (kbd "b") 'balance-windows)
-    (define-key map (kbd "SPC") 'switch-window-resume-auto-resize-window)
-    map)
-  "Extra keymap for ‘switch-window’ input.
+           (let ((map (make-sparse-keymap)))
+             (define-key map (kbd "k") 'switch-window-mvborder-up)
+             (define-key map (kbd "j") 'switch-window-mvborder-down)
+             (define-key map (kbd "h") 'switch-window-mvborder-left)
+             (define-key map (kbd "l") 'switch-window-mvborder-right)
+             (define-key map (kbd "b") 'balance-windows)
+             (define-key map (kbd "SPC") 'switch-window-resume-auto-resize-window)
+             map)
+           "Extra keymap for ‘switch-window’ input.
 Note: at the moment, it cannot bind commands, which will
 increase or decrease window's number, for example:
 `split-window-below' `split-window-right' `maximize'.")
@@ -70,3 +87,17 @@ increase or decrease window's number, for example:
 
 ;; Multi term config
 (require 'multi-term)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("8790269696322ff6821d75414c7d6ea8726d204cdeadedfd04c87b0c915296f7" default))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
