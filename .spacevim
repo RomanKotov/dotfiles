@@ -25,6 +25,7 @@ function! Layers()
   Layer 'which-key'
   Layer 'airline'
   Layer 'formatting'
+  Layer 'ctags'
 
   " Languages
   Layer 'clojure'
@@ -63,7 +64,6 @@ function! UserInit()
   Plug 'tpope/vim-repeat' " Repeat surround action
   Plug 'zchee/deoplete-jedi' " Python completion
   Plug 'mhinz/vim-mix-format' " Elixir format task
-  Plug 'jsfaint/gen_tags.vim' " Tags bindings
 
 endfunction
 
