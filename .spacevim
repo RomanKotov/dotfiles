@@ -1,60 +1,60 @@
 " Let Vim and NeoVim shares the same plugin directory.
 " Comment it out if you don't like
 let g:spacevim_plug_home = '~/.vim/plugged'
-let g:spacevim_localleader = '\'
+
+" The default leader key is space key.
+" Uncomment the line below and modify "<\Space>" if you prefer another
+" let g:spacevim_leader = "<\Space>"
+
+" The default local leader key is comma.
+" Uncomment the line below and modify ',' if you prefer another
+" let g:spacevim_localleader = ','
 
 " Enable the existing layers in space-vim
-function! Layers()
+let g:spacevim_layers = [
+      \ 'auto-completion',
+      \ 'better-motion',
+      \ 'better-defaults',
+      \ 'code-snippets',
+      \ 'ctrlp',
+      \ 'deoplete',
+      \ 'editing',
+      \ 'file-manager',
+      \ 'fzf',
+      \ 'git',
+      \ 'programming',
+      \ 'syntax-checking',
+      \ 'text-align',
+      \ 'tmux',
+      \ 'unite',
+      \ 'which-key',
+      \ 'airline',
+      \ 'formatting',
+      \ 'ctags',
+      \ 'clojure',
+      \ 'docker',
+      \ 'elixir',
+      \ 'erlang',
+      \ 'html',
+      \ 'java',
+      \ 'javascript',
+      \ 'markdown',
+      \ 'python',
+      \ 'ruby',
+      \ 'typescript',
+      \ 'vue',
+      \ ]
 
-  " Default layers
-  Layer 'auto-completion'
-  Layer 'better-motion'
-  Layer 'better-defaults'
-  Layer 'code-snippets'
-  Layer 'ctrlp'
-  Layer 'deoplete'
-  Layer 'editing'
-  Layer 'file-manager'
-  Layer 'fzf'
-  Layer 'git'
-  Layer 'programming'
-  Layer 'syntax-checking'
-  Layer 'text-align'
-  Layer 'tmux'
-  Layer 'unite'
-  Layer 'which-key'
-  Layer 'airline'
-  Layer 'formatting'
-  Layer 'ctags'
+" If you want to have more control over the layer, try using Layer command.
+" if g:spacevim.gui
+"   Layer 'airline'
+" endif
 
-  " Languages
-  Layer 'clojure'
-  Layer 'docker'
-  Layer 'elixir'
-  Layer 'erlang'
-  Layer 'html'
-  Layer 'java'
-  Layer 'javascript'
-  Layer 'markdown'
-  Layer 'python'
-  Layer 'ruby'
-  Layer 'typescript'
-  Layer 'vue'
-
-endfunction
-
-" Add your own plugins
+" Manage your own plugins, refer to vim-plug's instruction for more detials.
 function! UserInit()
 
-  " The default leader key is space key.
-  " Uncomment the line below and modify "<\Space>" if you prefer another
-  " let g:spacevim_leader = "<\Space>"
-
-  " The default local leader key is comma.
-  " Uncomment the line below and modify ',' if you prefer another
-  " let g:spacevim_localleader = ','
-
-  " Install personal plugins
+  " Add plugin via Plug command.
+  Plug 'junegunn/seoul256.vim'
   Plug 'kana/vim-textobj-entire' " entire buffer text object
   Plug 'kana/vim-textobj-lastpat' " Highlighted search as a text object
   Plug 'kana/vim-textobj-user' " User defined text objects (for kana-textobj-lastpat)
@@ -73,17 +73,17 @@ function! UserConfig()
   " let g:airline_powerline_fonts=1
 
   " Use gui colors in terminal if available
-  if has('termguicolors')
-    set termguicolors
-    if g:spacevim_tmux
-      " If use vim inside tmux, see https://github.com/vim/vim/issues/993
-      " set Vim-specific sequences for RGB colors
-      let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-      let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  function! s:enable_termgui()
+    if has('termguicolors')
+      set termguicolors
+      if g:spacevim.tmux
+        " If use vim inside tmux, see https://github.com/vim/vim/issues/993
+        " set Vim-specific sequences for RGB colors
+        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+      endif
     endif
-  endif
-
-  set infercase
+  endfunction
 
   " Python completion
   let g:pymode_breakpoint_cmd = 'import ipdb; ipdb.set_trace() # BREAKPOINT'
@@ -112,4 +112,6 @@ function! UserConfig()
   " Airline theme
   let g:airline_theme='luna'
 
+  " If your terminal(-emulator) supports true colors, uncomment the line below
+  " call s:enable_termgui()
 endfunction
