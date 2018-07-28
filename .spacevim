@@ -64,6 +64,7 @@ function! UserInit()
   Plug 'tpope/vim-repeat' " Repeat surround action
   Plug 'zchee/deoplete-jedi' " Python completion
   Plug 'mhinz/vim-mix-format' " Elixir format task
+  Plug 'airblade/vim-gitgutter' " Git gutter
 
 endfunction
 
@@ -111,6 +112,11 @@ function! UserConfig()
 
   " Airline theme
   let g:airline_theme='luna'
+
+  " Ale linters config
+  let g:ale_linters = {
+  \ 'elixir': ['credo'],
+  \}
 
   " If your terminal(-emulator) supports true colors, uncomment the line below
   " call s:enable_termgui()
