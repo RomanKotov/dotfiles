@@ -118,6 +118,9 @@ function! UserConfig()
   \ 'elixir': ['credo'],
   \}
 
+  " File extensions
+  au BufRead,BufNewFile *.drab   set filetype=eelixir
+
   " If your terminal(-emulator) supports true colors, uncomment the line below
   " call s:enable_termgui()
 endfunction
