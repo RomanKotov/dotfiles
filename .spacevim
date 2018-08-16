@@ -114,12 +114,18 @@ function! UserConfig()
   let g:airline_theme='luna'
 
   " Ale linters config
+  let g:ale_linter_aliases = {'vue': ['javascript', 'html', 'css']}
   let g:ale_linters = {
   \ 'elixir': ['credo'],
+  \ 'vue': ['eslint'],
   \}
 
   " File extensions
   au BufRead,BufNewFile *.drab   set filetype=eelixir
+
+  " Custom keybindings
+  nnoremap <Tab> :bn<CR>
+  nnoremap <S-Tab> :bp<CR>
 
   " If your terminal(-emulator) supports true colors, uncomment the line below
   " call s:enable_termgui()
