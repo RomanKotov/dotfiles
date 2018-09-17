@@ -1,4 +1,5 @@
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
+    ls-related = !sh -c 'git log --name-status --format='' --grep $1 | sort -u' -
 [core]
 	editor = vim
