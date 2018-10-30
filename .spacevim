@@ -41,6 +41,7 @@ let g:spacevim_layers = [
       \ 'markdown',
       \ 'python',
       \ 'ruby',
+      \ 'rust',
       \ 'typescript',
       \ 'vue',
       \ ]
@@ -126,6 +127,9 @@ function! UserConfig()
   " Custom keybindings
   nnoremap <Tab> :bn<CR>
   nnoremap <S-Tab> :bp<CR>
+
+  " Rust config
+  let g:deoplete#sources#rust#racer_binary=systemlist('which racer')[0]
 
   " If your terminal(-emulator) supports true colors, uncomment the line below
   " call s:enable_termgui()
