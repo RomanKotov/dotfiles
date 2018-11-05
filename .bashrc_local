@@ -17,4 +17,4 @@ rust_set_src_path()
 
 rust_set_src_path
 
-alias rrepl="rustup run nightly-2016-08-01 ~/.cargo/bin/rusti"
+alias rrepl="rustup run nightly-2016-08-01 rusti"
