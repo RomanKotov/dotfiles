@@ -66,6 +66,7 @@ function! UserInit()
   Plug 'zchee/deoplete-jedi' " Python completion
   Plug 'mhinz/vim-mix-format' " Elixir format task
   Plug 'airblade/vim-gitgutter' " Git gutter
+  Plug 'mhartington/oceanic-next' " Oceanic theme
 
 endfunction
 
@@ -132,5 +133,8 @@ function! UserConfig()
   let g:deoplete#sources#rust#racer_binary=systemlist('which racer')[0]
 
   " If your terminal(-emulator) supports true colors, uncomment the line below
-  " call s:enable_termgui()
+  call s:enable_termgui()
+
+  " Theme settings
+  colorscheme OceanicNext
 endfunction
