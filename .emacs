@@ -25,12 +25,21 @@
 (el-get-bundle evil-surround)
 (el-get-bundle evil-visualstar)
 (el-get-bundle evil-numbers)
+(el-get-bundle which-key)
 
+;; General configuration
+(setq x-select-enable-clipboard t)
 
 ;; Evil configuration
 (require 'evil)
 (evil-mode 1)
 (global-evil-visualstar-mode)
+(eval-after-load "evil"
+  '(progn
+     (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+     (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+     (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+     (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)))
 
 ;; Git gutter configuration
 (global-git-gutter-mode +1)
@@ -42,6 +51,18 @@
 ;; Neotree configuration
 (require 'neotree)
 (global-set-key [f4] 'neotree-toggle)
+(setq-default neo-show-hidden-files t)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("8790269696322ff6821d75414c7d6ea8726d204cdeadedfd04c87b0c915296f7" default)))
+ '(neo-cwd-line-style (quote text))
+ '(neo-vc-integration (quote (face)))
+ '(package-selected-packages (quote (evil-collection))))
 (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
 (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
 (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
@@ -101,3 +122,7 @@ increase or decrease window's number, for example:
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; Which key configuration
+(require 'which-key)
+(which-key-mode)
