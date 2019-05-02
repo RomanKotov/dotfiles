@@ -18,6 +18,7 @@
 (setq required-packages
       (append
        '(
+         auto-complete
          color-theme-solarized
          evil
          evil-numbers
