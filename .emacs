@@ -18,17 +18,17 @@
 (setq required-packages
       (append
        '(
+         color-theme-solarized
          evil
-         helm
-         which-key
-         switch-window
-         multi-term
-         magit
-         git-gutter
-         neotree
+         evil-numbers
          evil-surround
          evil-visualstar
-         evil-numbers
+         git-gutter
+         helm
+         magit
+         multi-term
+         neotree
+         switch-window
          which-key
          )
        (mapcar 'el-get-as-symbol (mapcar 'el-get-source-name el-get-sources))))
@@ -170,3 +170,10 @@ increase or decrease window's number, for example:
 ;; Line numbering configuration
 (require 'linum-relative)
 (setq linum-relative-backend 'display-line-numbers-mode)
+
+;; Appearance configuration
+(use-package intellij-theme :ensure t)
+(add-to-list 'default-frame-alist '(font . "Hack-11"))
+
+;; change all prompts to y or n
+(fset 'yes-or-no-p 'y-or-n-p)
