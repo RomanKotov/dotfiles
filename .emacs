@@ -1,38 +1,83 @@
+;; Proper evil startup
+(setq evil-want-integration nil)
+
 ;; Package management
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
 (unless (require 'el-get nil 'noerror)
-  (require 'package)
-  (add-to-list 'package-archives
-               '("melpa" . "http://melpa.org/packages/"))
-  (package-refresh-contents)
-  (package-initialize)
-  (package-install 'el-get)
-  (require 'el-get))
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
 
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 (el-get 'sync)
 
-;; Package list
-(el-get-bundle evil)
-(el-get-bundle helm)
-(el-get-bundle which-key)
-(el-get-bundle switch-window)
-(el-get-bundle multi-term)
-(el-get-bundle magit)
-(el-get-bundle git-gutter)
-(el-get-bundle neotree)
-(el-get-bundle evil-surround)
-(el-get-bundle evil-visualstar)
-(el-get-bundle evil-numbers)
-(el-get-bundle which-key)
+;; Package list for el-get
+(setq required-packages
+      (append
+       '(
+         evil
+         helm
+         which-key
+         switch-window
+         multi-term
+         magit
+         git-gutter
+         neotree
+         evil-surround
+         evil-visualstar
+         evil-numbers
+         which-key
+         )
+       (mapcar 'el-get-as-symbol (mapcar 'el-get-source-name el-get-sources))))
+
+(el-get 'sync required-packages)
+
+;; Install packages from Elpa
+(require 'package)
+(require 'cl)
+
+;; Elpa package list
+(defvar elpa-packages '(
+                        evil-collection
+                        use-package
+                        linum-relative
+                        ))
+
+(defun cfg:install-packages ()
+  (let ((pkgs (remove-if #'package-installed-p elpa-packages)))
+    (when pkgs
+      (message "%s" "Emacs refresh packages database...")
+      (package-refresh-contents)
+      (message "%s" " done.")
+      (dolist (p elpa-packages)
+        (package-install p)))))
+
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
+(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+
+(package-initialize)
+
+(cfg:install-packages)
 
 ;; General configuration
-(setq x-select-enable-clipboard t)
+(setq x-select-enable-clipboard t) ; clipboard integration
 
 ;; Evil configuration
-(require 'evil)
-(evil-mode 1)
+(use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+  (setq evil-want-keybinding nil)
+  :config
+  (evil-mode 1))
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
 (global-evil-visualstar-mode)
 (eval-after-load "evil"
   '(progn
@@ -60,9 +105,11 @@
  '(custom-safe-themes
    (quote
     ("8790269696322ff6821d75414c7d6ea8726d204cdeadedfd04c87b0c915296f7" default)))
+ '(display-line-numbers-type (quote visual))
+ '(global-display-line-numbers-mode t)
  '(neo-cwd-line-style (quote text))
  '(neo-vc-integration (quote (face)))
- '(package-selected-packages (quote (evil-collection))))
+ '(package-selected-packages (quote (use-package evil-collection))))
 (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
 (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
 (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
@@ -108,14 +155,7 @@ increase or decrease window's number, for example:
 
 ;; Multi term config
 (require 'multi-term)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("8790269696322ff6821d75414c7d6ea8726d204cdeadedfd04c87b0c915296f7" default))))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -126,3 +166,7 @@ increase or decrease window's number, for example:
 ;; Which key configuration
 (require 'which-key)
 (which-key-mode)
+
+;; Line numbering configuration
+(require 'linum-relative)
+(setq linum-relative-backend 'display-line-numbers-mode)
