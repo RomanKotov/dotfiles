@@ -19,8 +19,9 @@
       (append
        '(
          auto-complete
-         color-theme-solarized
+         general
          evil
+         evil-matchit
          evil-numbers
          evil-surround
          evil-visualstar
@@ -65,6 +66,7 @@
 
 ;; General configuration
 (setq x-select-enable-clipboard t) ; clipboard integration
+(show-paren-mode 1)
 
 ;; Evil configuration
 (use-package evil
@@ -82,20 +84,23 @@
 (global-evil-visualstar-mode)
 (eval-after-load "evil"
   '(progn
+     (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+     (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
      (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
      (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
      (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-     (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)))
+     (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right))
+  )
 
 ;; Git gutter configuration
 (global-git-gutter-mode +1)
 
 ;; Helm configuration
-(require 'helm)
 (helm-mode 1)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
 
 ;; Neotree configuration
-(require 'neotree)
 (global-set-key [f4] 'neotree-toggle)
 (setq-default neo-show-hidden-files t)
 (custom-set-variables
@@ -110,18 +115,16 @@
  '(global-display-line-numbers-mode t)
  '(neo-cwd-line-style (quote text))
  '(neo-vc-integration (quote (face)))
- '(package-selected-packages (quote (use-package evil-collection))))
+ '(package-selected-packages (quote (intellij-theme use-package evil-collection))))
 (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
 (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
 (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
 (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
 
 ;; Which-key configuration
-(require 'which-key)
 (which-key-mode)
 
 ;; Switch-window configuration
-(require 'switch-window)
 (global-set-key (kbd "C-x o") 'switch-window)
 (global-set-key (kbd "C-x 1") 'switch-window-then-maximize)
 (global-set-key (kbd "C-x 2") 'switch-window-then-split-below)
@@ -148,14 +151,11 @@
              (define-key map (kbd "b") 'balance-windows)
              (define-key map (kbd "SPC") 'switch-window-resume-auto-resize-window)
              map)
-           "Extra keymap for ‘switch-window’ input.
+"Extra keymap for ‘switch-window’ input.
 Note: at the moment, it cannot bind commands, which will
 increase or decrease window's number, for example:
 `split-window-below' `split-window-right' `maximize'.")
 (setq switch-window-shortcut-appearance 'asciiart)
-
-;; Multi term config
-(require 'multi-term)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -165,11 +165,9 @@ increase or decrease window's number, for example:
  )
 
 ;; Which key configuration
-(require 'which-key)
 (which-key-mode)
 
 ;; Line numbering configuration
-(require 'linum-relative)
 (setq linum-relative-backend 'display-line-numbers-mode)
 
 ;; Appearance configuration
@@ -178,3 +176,24 @@ increase or decrease window's number, for example:
 
 ;; change all prompts to y or n
 (fset 'yes-or-no-p 'y-or-n-p)
+
+;; Matchit configuration
+(global-evil-matchit-mode 1)
+
+;; Leader configuration
+(global-evil-leader-mode)
+
+(general-define-key
+:keymaps '(normal visual)
+:prefix "SPC"
+:non-normal-prefix "M-SPC"
+"f" '(:ignore t :which-key "files")
+"h" '(:ignore t :which-key "hunk")
+"g" '(:ignore t :which-key "git")
+"f f" 'helm-find-files
+"h s" 'git-gutter:stage-hunk
+"h p" 'git-gutter:popup-hunk
+"h u" 'git-gutter:unstage-hunk
+"g s" 'magit-status
+"g c" 'magit-commit
+)
