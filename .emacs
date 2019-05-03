@@ -24,6 +24,7 @@
          company-mode
          general
          evil
+         evil-magit
          evil-matchit
          evil-leader
          evil-numbers
@@ -38,7 +39,6 @@
          multi-term
          neotree
          projectile
-         switch-window
          which-key
          )
        (mapcar 'el-get-as-symbol (mapcar 'el-get-source-name el-get-sources))))
@@ -98,12 +98,15 @@
 (eval-after-load "evil"
   '(progn
      (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+     (define-key evil-normal-state-map (kbd "] c") 'git-gutter:next-hunk)
+     (define-key evil-normal-state-map (kbd "[ c") 'git-gutter:previous-hunk)
      (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
      (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
      (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
      (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
      (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right))
   )
+(require 'evil-magit)
 
 ;; Git gutter configuration
 (global-git-gutter-mode +1)
@@ -138,39 +141,6 @@
 
 ;; Which-key configuration
 (which-key-mode)
-
-;; Switch-window configuration
-(global-set-key (kbd "C-x o") 'switch-window)
-(global-set-key (kbd "C-x 1") 'switch-window-then-maximize)
-(global-set-key (kbd "C-x 2") 'switch-window-then-split-below)
-(global-set-key (kbd "C-x 3") 'switch-window-then-split-right)
-(global-set-key (kbd "C-x 0") 'switch-window-then-delete)
-
-(global-set-key (kbd "C-x 4 d") 'switch-window-then-dired)
-(global-set-key (kbd "C-x 4 f") 'switch-window-then-find-file)
-(global-set-key (kbd "C-x 4 m") 'switch-window-then-compose-mail)
-(global-set-key (kbd "C-x 4 r") 'switch-window-then-find-file-read-only)
-
-(global-set-key (kbd "C-x 4 C-f") 'switch-window-then-find-file)
-(global-set-key (kbd "C-x 4 C-o") 'switch-window-then-display-buffer)
-
-(global-set-key (kbd "C-x 4 0") 'switch-window-then-kill-buffer)
-
-(makunbound 'switch-window-extra-map)
-(defcustom switch-window-extra-map
-           (let ((map (make-sparse-keymap)))
-             (define-key map (kbd "k") 'switch-window-mvborder-up)
-             (define-key map (kbd "j") 'switch-window-mvborder-down)
-             (define-key map (kbd "h") 'switch-window-mvborder-left)
-             (define-key map (kbd "l") 'switch-window-mvborder-right)
-             (define-key map (kbd "b") 'balance-windows)
-             (define-key map (kbd "SPC") 'switch-window-resume-auto-resize-window)
-             map)
-"Extra keymap for ‘switch-window’ input.
-Note: at the moment, it cannot bind commands, which will
-increase or decrease window's number, for example:
-`split-window-below' `split-window-right' `maximize'.")
-(setq switch-window-shortcut-appearance 'asciiart)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
