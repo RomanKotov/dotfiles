@@ -20,18 +20,21 @@
       (append
        '(
          all-the-icons
-         auto-complete
+         company-mode
          general
          evil
          evil-matchit
+         evil-leader
          evil-numbers
          evil-surround
          evil-visualstar
+         flycheck
          git-gutter
          helm
          magit
          multi-term
          neotree
+         projectile
          switch-window
          which-key
          )
@@ -219,3 +222,9 @@ increase or decrease window's number, for example:
 (require 'spaceline-config)
 (spaceline-spacemacs-theme)
 (use-package all-the-icons)
+
+;; Flycheck configuration
+(global-flycheck-mode)
+
+;; Company mode
+(add-hook 'after-init-hook 'global-company-mode)
