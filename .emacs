@@ -27,12 +27,15 @@
          evil-magit
          evil-matchit
          evil-leader
+         evil-nerd-commenter
          evil-numbers
          evil-surround
          evil-visualstar
          flycheck
          git-gutter
          helm
+         helm-ag
+         helm-projectile
          lsp-mode
          lsp-ui
          magit
@@ -114,6 +117,11 @@
 ;; Helm configuration
 (helm-mode 1)
 (global-set-key (kbd "M-x") 'helm-M-x)
+(custom-set-variables
+ '(helm-follow-mode-persistent t)
+ '(helm-mode-fuzzy-match t)
+ )
+(helm-projectile-on)
 (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
 
 ;; Neotree configuration
@@ -170,13 +178,19 @@
 :non-normal-prefix "M-SPC"
 "f" '(:ignore t :which-key "files")
 "h" '(:ignore t :which-key "hunk")
+"b" '(:ignore t :which-key "buffers")
 "g" '(:ignore t :which-key "git")
-"f f" 'helm-find-files
+";" '(:ignore t :which-key "misc")
+"ag" 'helm-do-grep-ag
+"b b" 'helm-buffers-list
+"f f" 'helm-projectile-find-file
+"f d" 'neotree-find
 "h s" 'git-gutter:stage-hunk
 "h p" 'git-gutter:popup-hunk
 "h u" 'git-gutter:unstage-hunk
 "g s" 'magit-status
 "g c" 'magit-commit
+"; ;" 'evilnc-comment-or-uncomment-lines
 )
 
 ;; Markdown support
@@ -203,7 +217,7 @@
 ;; Company mode
 (add-hook 'after-init-hook 'global-company-mode)
 
-;; Lsp configuraion
+;; Lsp configuration
 (use-package lsp-mode
   :config
   (setq lsp-prefer-flymake nil) ;; Prefer using lsp-ui (flycheck) over flymake.
