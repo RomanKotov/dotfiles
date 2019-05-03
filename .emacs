@@ -1,5 +1,6 @@
 ;; Proper evil startup
 (setq evil-want-integration nil)
+(setq evil-want-C-u-scroll t)
 
 ;; Package management
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
@@ -18,6 +19,7 @@
 (setq required-packages
       (append
        '(
+         all-the-icons
          auto-complete
          general
          evil
@@ -44,8 +46,10 @@
 ;; Elpa package list
 (defvar elpa-packages '(
                         evil-collection
-                        use-package
                         linum-relative
+                        spaceline
+                        spacemacs-theme
+                        use-package
                         ))
 
 (defun cfg:install-packages ()
@@ -59,6 +63,7 @@
 
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 
 (package-initialize)
 
@@ -67,6 +72,7 @@
 ;; General configuration
 (setq x-select-enable-clipboard t) ; clipboard integration
 (show-paren-mode 1)
+(setq-default word-wrap t)
 
 ;; Evil configuration
 (use-package evil
@@ -101,6 +107,7 @@
 (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
 
 ;; Neotree configuration
+(setq neo-autorefresh nil)
 (global-set-key [f4] 'neotree-toggle)
 (setq-default neo-show-hidden-files t)
 (custom-set-variables
@@ -116,6 +123,7 @@
  '(neo-cwd-line-style (quote text))
  '(neo-vc-integration (quote (face)))
  '(package-selected-packages (quote (intellij-theme use-package evil-collection))))
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
 (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
 (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
@@ -170,10 +178,6 @@ increase or decrease window's number, for example:
 ;; Line numbering configuration
 (setq linum-relative-backend 'display-line-numbers-mode)
 
-;; Appearance configuration
-(use-package intellij-theme :ensure t)
-(add-to-list 'default-frame-alist '(font . "Hack-11"))
-
 ;; change all prompts to y or n
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -197,3 +201,21 @@ increase or decrease window's number, for example:
 "g s" 'magit-status
 "g c" 'magit-commit
 )
+
+;; Markdown support
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+(custom-set-variables
+ '(markdown-command "/usr/bin/pandoc"))
+
+;; Spacemacs theme and visual
+(load-theme 'spacemacs-dark t)
+(setq powerline-default-separator 'arrow-fade)
+(require 'spaceline-config)
+(spaceline-spacemacs-theme)
+(use-package all-the-icons)
