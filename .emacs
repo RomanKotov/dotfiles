@@ -43,6 +43,7 @@
          neotree
          projectile
          which-key
+	 zoom-window
          )
        (mapcar 'el-get-as-symbol (mapcar 'el-get-source-name el-get-sources))))
 
@@ -83,6 +84,9 @@
 (setq x-select-enable-clipboard t) ; clipboard integration
 (show-paren-mode 1)
 (setq-default word-wrap t)
+(menu-bar-mode -1)
+(toggle-scroll-bar -1)
+(tool-bar-mode -1)
 
 ;; Evil configuration
 (use-package evil
@@ -104,6 +108,7 @@
      (define-key evil-normal-state-map (kbd "] c") 'git-gutter:next-hunk)
      (define-key evil-normal-state-map (kbd "[ c") 'git-gutter:previous-hunk)
      (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+     (define-key evil-normal-state-map (kbd "C-w z") 'zoom-window-zoom)
      (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
      (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
      (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
@@ -147,9 +152,6 @@
 (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
 (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
 
-;; Which-key configuration
-(which-key-mode)
-
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -191,6 +193,9 @@
 "g s" 'magit-status
 "g c" 'magit-commit
 "; ;" 'evilnc-comment-or-uncomment-lines
+"; m" 'menu-bar-mode
+"; s" 'toggle-scroll-bar
+"; t" 'tool-bar-mode
 )
 
 ;; Markdown support
@@ -222,13 +227,10 @@
   :config
   (setq lsp-prefer-flymake nil) ;; Prefer using lsp-ui (flycheck) over flymake.
   )
-
 (add-hook 'prog-mode-hook #'lsp)
-
 (use-package lsp-ui
   :requires lsp-mode flycheck
   :config
-
   (setq lsp-ui-doc-enable t
         lsp-ui-doc-use-childframe t
         lsp-ui-doc-position 'top
@@ -246,21 +248,17 @@
   :config
   (global-company-mode 1)
   (global-set-key (kbd "<tab>") 'company-complete))
-
 (use-package company-lsp
   :requires company
   :config
   (push 'company-lsp company-backends)
-
    ;; Disable client-side cache because the LSP server does a better job.
   (setq company-transformers nil
         company-lsp-async t
         company-lsp-cache-candidates nil))
-
 (dap-mode 1)
 (dap-ui-mode 1)
 (require 'dap-python)
-
 (setq lsp-restart 'auto-restart)
 
 ;; Terminal fix
@@ -270,3 +268,7 @@
   (add-hook 'after-change-major-mode-hook
             (lambda () (display-line-numbers-mode 0))
             :append :local))
+
+;; Zoom window configuration
+(custom-set-variables
+ '(zoom-window-mode-line-color "DarkGreen"))
