@@ -82,11 +82,21 @@
 
 ;; General configuration
 (setq x-select-enable-clipboard t) ; clipboard integration
-(show-paren-mode 1)
-(setq-default word-wrap t)
+(show-paren-mode 1) ; highlight corresponding paren
+(setq-default word-wrap t) ; wrap words
+; disable emacs heading
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
 (tool-bar-mode -1)
+; backups configuration
+(setq
+   backup-by-copying t      ; don't clobber symlinks
+   backup-directory-alist
+    '(("." . "/tmp/.emacs/"))    ; don't litter my fs tree
+   delete-old-versions t
+   kept-new-versions 6
+   kept-old-versions 2
+   version-control t)       ; use versioned backups
 
 ;; Evil configuration
 (use-package evil
