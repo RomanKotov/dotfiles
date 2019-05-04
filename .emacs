@@ -262,3 +262,11 @@
 (require 'dap-python)
 
 (setq lsp-restart 'auto-restart)
+
+;; Terminal fix
+(add-hook 'term-mode-hook 'my-inhibit-global-linum-mode)
+(defun my-inhibit-global-linum-mode ()
+  "Counter-act `global-linum-mode'."
+  (add-hook 'after-change-major-mode-hook
+            (lambda () (display-line-numbers-mode 0))
+            :append :local))
