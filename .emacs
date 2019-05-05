@@ -42,6 +42,7 @@
          multi-term
          neotree
          projectile
+	 rainbow-delimiters
          which-key
 	 yasnippet
 	 yasnippet-snippets
@@ -288,3 +289,6 @@
 
 ;; Yasnipet configuration
 (yas-global-mode 1)
+
+;; Rainbow delimiters
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
