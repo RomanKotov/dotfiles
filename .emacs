@@ -43,6 +43,8 @@
          neotree
          projectile
          which-key
+	 yasnippet
+	 yasnippet-snippets
 	 zoom-window
          )
        (mapcar 'el-get-as-symbol (mapcar 'el-get-source-name el-get-sources))))
@@ -203,6 +205,7 @@
 "g s" 'magit-status
 "g c" 'magit-commit
 "; ;" 'evilnc-comment-or-uncomment-lines
+"; i" 'yas-insert-snippet
 "; m" 'menu-bar-mode
 "; s" 'toggle-scroll-bar
 "; t" 'tool-bar-mode
@@ -282,3 +285,6 @@
 ;; Zoom window configuration
 (custom-set-variables
  '(zoom-window-mode-line-color "DarkGreen"))
+
+;; Yasnipet configuration
+(yas-global-mode 1)
