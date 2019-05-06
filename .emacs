@@ -202,7 +202,7 @@
 "f d" 'neotree-find
 "h s" 'git-gutter:stage-hunk
 "h p" 'git-gutter:popup-hunk
-"h u" 'git-gutter:unstage-hunk
+"h r" 'git-gutter:revert-hunk
 "g s" 'magit-status
 "g c" 'magit-commit
 "; ;" 'evilnc-comment-or-uncomment-lines
