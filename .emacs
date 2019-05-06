@@ -206,7 +206,6 @@
 "g s" 'magit-status
 "g c" 'magit-commit
 "; ;" 'evilnc-comment-or-uncomment-lines
-"; i" 'yas-insert-snippet
 "; m" 'menu-bar-mode
 "; s" 'toggle-scroll-bar
 "; t" 'tool-bar-mode
@@ -289,6 +288,9 @@
 
 ;; Yasnipet configuration
 (yas-global-mode 1)
+(define-key yas-minor-mode-map (kbd "<tab>") nil)
+(define-key yas-minor-mode-map (kbd "TAB") nil)
+(define-key yas-minor-mode-map (kbd "C-c & e") #'yas-expand)
 
 ;; Rainbow delimiters
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
