@@ -22,6 +22,7 @@
          all-the-icons
          company-lsp
          company-mode
+         company-quickhelp
          general
          evil
          evil-magit
@@ -41,6 +42,7 @@
          magit
          multi-term
          neotree
+	 pos-tip
          projectile
 	 rainbow-delimiters
          which-key
@@ -235,6 +237,7 @@
 
 ;; Company mode
 (add-hook 'after-init-hook 'global-company-mode)
+(company-quickhelp-mode)
 
 ;; Lsp configuration
 (use-package lsp-mode
