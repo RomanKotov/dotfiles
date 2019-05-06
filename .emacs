@@ -117,6 +117,7 @@
 (global-evil-visualstar-mode)
 (eval-after-load "evil"
   '(progn
+     (setq-default evil-cross-lines t)
      (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
      (define-key evil-normal-state-map (kbd "] c") 'git-gutter:next-hunk)
      (define-key evil-normal-state-map (kbd "[ c") 'git-gutter:previous-hunk)
