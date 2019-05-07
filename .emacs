@@ -149,6 +149,7 @@
 (setq neo-autorefresh nil)
 (global-set-key [f4] 'neotree-toggle)
 (setq-default neo-show-hidden-files t)
+(setq neo-window-fixed-size nil)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

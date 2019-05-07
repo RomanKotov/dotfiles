@@ -3,3 +3,5 @@
 	ls-related = !sh -c 'git log --name-status --format='' --grep $1 | sort -u' -
 [core]
 	editor = vim
+[credential]
+	helper = cache --timeout=28800
