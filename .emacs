@@ -62,6 +62,7 @@
 (defvar elpa-packages '(
                         dap-mode
                         evil-collection
+                        eyebrowse
                         linum-relative
                         spaceline
                         spacemacs-theme
@@ -139,18 +140,6 @@
 (helm-mode 1)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (custom-set-variables
- '(helm-follow-mode-persistent t)
- '(helm-mode-fuzzy-match t)
- )
-(helm-projectile-on)
-(setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
-
-;; Neotree configuration
-(setq neo-autorefresh nil)
-(global-set-key [f4] 'neotree-toggle)
-(setq-default neo-show-hidden-files t)
-(setq neo-window-fixed-size nil)
-(custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
@@ -160,9 +149,22 @@
     ("8790269696322ff6821d75414c7d6ea8726d204cdeadedfd04c87b0c915296f7" default)))
  '(display-line-numbers-type (quote visual))
  '(global-display-line-numbers-mode t)
+ '(helm-follow-mode-persistent t)
+ '(helm-mode-fuzzy-match t)
+ '(markdown-command "/usr/bin/pandoc")
  '(neo-cwd-line-style (quote text))
  '(neo-vc-integration (quote (face)))
- '(package-selected-packages (quote (intellij-theme use-package evil-collection))))
+ '(package-selected-packages (quote (use-package evil-collection)))
+ '(zoom-window-mode-line-color "DarkGreen"))
+(helm-projectile-on)
+(setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
+
+;; Neotree configuration
+(setq neo-autorefresh nil)
+(global-set-key [f4] 'neotree-toggle)
+(setq-default neo-show-hidden-files t)
+(setq neo-window-fixed-size nil)
+
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
 (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
@@ -223,8 +225,6 @@
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
-(custom-set-variables
- '(markdown-command "/usr/bin/pandoc"))
 
 ;; Spacemacs theme and visual
 (load-theme 'spacemacs-dark t)
@@ -287,15 +287,16 @@
             (lambda () (display-line-numbers-mode 0))
             :append :local))
 
-;; Zoom window configuration
-(custom-set-variables
- '(zoom-window-mode-line-color "DarkGreen"))
-
 ;; Yasnipet configuration
 (yas-global-mode 1)
 (define-key yas-minor-mode-map (kbd "<tab>") nil)
 (define-key yas-minor-mode-map (kbd "TAB") nil)
 (define-key yas-minor-mode-map (kbd "C-c & e") #'yas-expand)
 
-;; Rainbow delimiters
+;; Rainbow delimiters configuration
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
+;; Eyebrowse configuration
+(eyebrowse-mode t)
+(setq eyebrowse-wrap-around t)
+(eyebrowse-setup-opinionated-keys)
