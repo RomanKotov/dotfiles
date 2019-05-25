@@ -148,7 +148,6 @@
    (quote
     ("8790269696322ff6821d75414c7d6ea8726d204cdeadedfd04c87b0c915296f7" default)))
  '(display-line-numbers-type (quote visual))
- '(global-display-line-numbers-mode t)
  '(helm-follow-mode-persistent t)
  '(helm-mode-fuzzy-match t)
  '(markdown-command "/usr/bin/pandoc")
@@ -183,6 +182,7 @@
 
 ;; Line numbering configuration
 (setq linum-relative-backend 'display-line-numbers-mode)
+(add-hook 'prog-mode-hook 'linum-relative-mode)
 
 ;; change all prompts to y or n
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -278,14 +278,6 @@
 (dap-ui-mode 1)
 (require 'dap-python)
 (setq lsp-restart 'auto-restart)
-
-;; Terminal fix
-(add-hook 'term-mode-hook 'my-inhibit-global-linum-mode)
-(defun my-inhibit-global-linum-mode ()
-  "Counter-act `global-linum-mode'."
-  (add-hook 'after-change-major-mode-hook
-            (lambda () (display-line-numbers-mode 0))
-            :append :local))
 
 ;; Yasnipet configuration
 (yas-global-mode 1)
