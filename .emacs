@@ -153,7 +153,7 @@
  '(markdown-command "/usr/bin/pandoc")
  '(neo-cwd-line-style (quote text))
  '(neo-vc-integration (quote (face)))
- '(package-selected-packages (quote (use-package evil-collection)))
+ '(package-selected-packages (quote (yaml-mode use-package evil-collection)))
  '(zoom-window-mode-line-color "DarkGreen"))
 (helm-projectile-on)
 (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
@@ -202,7 +202,7 @@
 "b" '(:ignore t :which-key "buffers")
 "g" '(:ignore t :which-key "git")
 ";" '(:ignore t :which-key "misc")
-"ag" 'helm-do-grep-ag
+"ag" 'helm-do-ag-project-root
 "b b" 'helm-buffers-list
 "f f" 'helm-projectile-find-file
 "f d" 'neotree-find
