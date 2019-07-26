@@ -1,6 +1,7 @@
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
 	ls-related = !sh -c 'git log --name-status --format='' --grep $1 | sort -u' -
+	diffipnb = !bash -c \"nbdiff-web <(git --no-pager show ${2:-HEAD}:$1) $1\" -
 [core]
 	editor = vim
 [credential]
