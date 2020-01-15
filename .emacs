@@ -62,6 +62,7 @@
 ;; Elpa package list
 (defvar elpa-packages '(
                         dap-mode
+                        elixir-mode
                         evil-collection
                         eyebrowse
                         linum-relative
@@ -245,6 +246,8 @@
 (use-package lsp-mode
   :config
   (setq lsp-prefer-flymake nil) ;; Prefer using lsp-ui (flycheck) over flymake.
+  :init
+  (add-to-list 'exec-path "~/projects/elixir-ls/release")
   )
 (add-hook 'prog-mode-hook #'lsp)
 (use-package lsp-ui
