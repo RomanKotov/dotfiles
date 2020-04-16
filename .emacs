@@ -46,6 +46,7 @@
 	 pos-tip
          projectile
 	 rainbow-delimiters
+	 rust-mode
          which-key
 	 yasnippet
 	 yasnippet-snippets
@@ -69,6 +70,7 @@
                         spaceline
                         spacemacs-theme
                         use-package
+			web-mode
                         ))
 
 (defun cfg:install-packages ()
@@ -296,3 +298,8 @@
 (eyebrowse-mode t)
 (setq eyebrowse-wrap-around t)
 (eyebrowse-setup-opinionated-keys)
+
+;; Web mode configuration
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.l?eex\\'" . web-mode))
+
