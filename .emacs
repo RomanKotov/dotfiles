@@ -25,6 +25,7 @@
          company-mode
          company-quickhelp
          general
+	 editorconfig
          evil
          evil-magit
          evil-matchit
@@ -47,6 +48,7 @@
          projectile
 	 rainbow-delimiters
 	 rust-mode
+	 web-mode
          which-key
 	 yasnippet
 	 yasnippet-snippets
@@ -70,7 +72,6 @@
                         spaceline
                         spacemacs-theme
                         use-package
-			web-mode
                         ))
 
 (defun cfg:install-packages ()
@@ -303,3 +304,5 @@
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.l?eex\\'" . web-mode))
 
+;; Editorconfig mode configuration
+(editorconfig-mode 1)
