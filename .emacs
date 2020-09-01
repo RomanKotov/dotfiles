@@ -145,8 +145,9 @@
 (use-package all-the-icons)
 
 (use-package company-quickhelp
-  :config
-  (company-quickhelp-mode))
+  :defines company-quickhelp-delay
+  :hook (global-company-mode . company-quickhelp-mode)
+  :custom (company-quickhelp-delay 0.8))
 
 (use-package general
   :config
@@ -231,15 +232,6 @@
   (global-company-mode 1)
   (global-set-key (kbd "<tab>") 'company-complete)
   (add-hook 'after-init-hook 'global-company-mode))
-
-(use-package company-lsp
-  :requires company
-  :config
-  (push 'company-lsp company-backends)
-   ;; Disable client-side cache because the LSP server does a better job.
-  (setq company-transformers nil
-        company-lsp-async t
-        company-lsp-cache-candidates nil))
 
 (use-package magit)
 
