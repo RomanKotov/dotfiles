@@ -1,11 +1,15 @@
+;;; package --- .emacs file
+;;; Commentary:
+;;; packages configuration
+
+;;; Code:
+
 ;; load package manager
 (require 'package)
+(require 'cl)
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-
-;; Install packages from Elpa
-(require 'cl)
 
 ;; Elpa package list
 (defvar elpa-packages '(use-package spacemacs-theme))
@@ -51,7 +55,7 @@
 (require 'use-package)
 
 (use-package helm
-  :config 
+  :config
   (helm-mode 1)
   (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
   (global-set-key (kbd "M-x") 'helm-M-x))
@@ -289,6 +293,7 @@
 (fset 'yes-or-no-p 'y-or-n-p) ;; change all prompts to y or n
 (show-paren-mode 1) ; highlight corresponding paren
 (setq-default word-wrap t) ; wrap words
+(setq inhibit-startup-screen t)
 
 ; disable emacs heading
 (menu-bar-mode -1)
@@ -318,7 +323,9 @@
  '(markdown-command "/usr/bin/pandoc")
  '(neo-cwd-line-style 'text)
  '(neo-vc-integration '(face))
- '(package-selected-packages '(yaml-mode use-package evil-collection))
+ '(package-selected-packages
+   '(evil-matchit evil-surround evil-goggles evil-magit evil-leader evil-numbers evil-visualstar evil-nerd-commenter yaml-mode use-package evil-collection))
+ '(require-final-newline nil)
  '(zoom-window-mode-line-color "DarkGreen"))
 
 (custom-set-faces
@@ -333,3 +340,6 @@
  '(evil-goggles-undo-redo-change-face ((t (:inherit diff-changed))))
  '(evil-goggles-undo-redo-remove-face ((t (:inherit diff-removed))))
  '(evil-goggles-yank-face ((t (:inherit diff-changed)))))
+
+(provide '.emacs)
+;;; .emacs ends here
