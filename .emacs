@@ -81,6 +81,7 @@
   (use-package evil-collection
     :after evil
     :config
+    (delete 'company evil-collection-mode-list)
     (evil-collection-init)
     (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
     (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
