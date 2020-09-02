@@ -103,11 +103,6 @@
   ;; evil numbers
   (use-package evil-numbers)
 
-  ;; evil leader integration
-  (use-package evil-leader
-    :init
-    (global-evil-leader-mode))
-
   ;; magit integration
   (use-package evil-magit)
 
@@ -143,11 +138,6 @@
   (message "Loading evil-mode...done"))
 
 (use-package all-the-icons)
-
-(use-package company-quickhelp
-  :defines company-quickhelp-delay
-  :hook (global-company-mode . company-quickhelp-mode)
-  :custom (company-quickhelp-delay 0.8))
 
 (use-package general
   :config
@@ -233,6 +223,13 @@
   (global-set-key (kbd "<tab>") 'company-complete)
   (add-hook 'after-init-hook 'global-company-mode))
 
+(use-package pos-tip)
+
+(use-package company-quickhelp
+  :defines company-quickhelp-delay
+  :hook (global-company-mode . company-quickhelp-mode)
+  :custom (company-quickhelp-delay 0.8))
+
 (use-package magit)
 
 (use-package multi-term)
@@ -244,8 +241,6 @@
   (setq-default neo-show-hidden-files t)
   (setq neo-window-fixed-size nil)
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
-
-(use-package pos-tip)
 
 (use-package projectile)
 
