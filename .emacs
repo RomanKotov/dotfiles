@@ -194,12 +194,16 @@
 
 ;; Lsp configuration
 (use-package lsp-mode
+  :hook (lsp-mode . (lambda ()
+		      (let ((lsp-keymap-prefix "M-l"))
+			(lsp-enable-which-key-integration))))
   :config
-  (setq lsp-prefer-flymake nil) ;; Prefer using lsp-ui (flycheck) over flymake.
-  (setq lsp-restart 'auto-restart)
-  (add-hook 'prog-mode-hook #'lsp)
+  (define-key lsp-mode-map (kbd "M-l") lsp-command-map)
   :init
-  (add-to-list 'exec-path "~/projects/elixir-ls/release"))
+      (setq lsp-prefer-flymake nil ;; Prefer using lsp-ui (flycheck) over flymake.
+	    lsp-restart 'auto-restart)
+      (add-hook 'prog-mode-hook #'lsp)
+      (add-to-list 'exec-path "~/projects/elixir-ls/release"))
 
 (use-package lsp-ui
   :requires lsp-mode flycheck
