@@ -280,6 +280,11 @@
 
 (use-package elixir-mode)
 
+;; Erlang configuration
+(use-package erlang
+  :config
+  (add-hook 'erlang-mode-hook #'lsp))
+
 ;; General configuration
 (setq x-select-enable-clipboard t) ; clipboard integration
 (fset 'yes-or-no-p 'y-or-n-p) ;; change all prompts to y or n
