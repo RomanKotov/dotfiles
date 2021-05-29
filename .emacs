@@ -135,8 +135,7 @@
   (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
   (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
   (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
-
-  (message "Loading evil-mode...done"))
+  )
 
 (use-package all-the-icons)
 
@@ -276,9 +275,46 @@
 (use-package dap-mode
   :config
   (dap-mode 1)
-  (dap-ui-mode 1))
+  (dap-ui-mode 1)
+  (dap-tooltip-mode 1)
+  (tooltip-mode 1)
+  (dap-ui-controls-mode 1))
 
-(use-package elixir-mode)
+(use-package elixir-mode
+  :config
+  (require 'dap-elixir)
+  (defun dap-elixir--populate-start-file-args (conf)
+    "Populate CONF with the required arguments."
+    (-> conf
+	(dap--put-if-absent :dap-server-path '("debugger.sh"))
+	(dap--put-if-absent :type "mix_task")
+	(dap--put-if-absent :name "mix test")
+	(dap--put-if-absent :request "launch")
+	(dap--put-if-absent :task "test")
+	(dap--put-if-absent :projectDir (lsp-find-session-folder (lsp-session) (buffer-file-name)))
+	(dap--put-if-absent :cwd (lsp-find-session-folder (lsp-session) (buffer-file-name)))))
+
+  (dap-register-debug-template
+   "Elixir::Phoenix::Start"
+   (list :type "Elixir"
+	 :request "launch"
+	 :excludeModules (list "Bcrypt.Base")
+	 :task "phx.server"
+	 :name "mix phx.server"))
+
+  (dap-register-debug-template
+   "Elixir::Test"
+   (list :type "Elixir"
+	 :request "launch"
+	 :excludeModules (list "Bcrypt.Base")
+	 :startApps 1
+	 :task "test"
+	 :taskArgs (list "--failed")
+	 :name "mix test"
+	 :requireFiles (list
+			"test/**/test_helper.exs"
+			"test/**/*_test.exs"))
+   ))
 
 ;; Erlang configuration
 (use-package erlang
