@@ -104,9 +104,6 @@
   ;; evil numbers
   (use-package evil-numbers)
 
-  ;; magit integration
-  (use-package evil-magit)
-
   ;; visual hints while editing
   (use-package evil-goggles
     :config
