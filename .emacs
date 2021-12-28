@@ -218,6 +218,8 @@
 
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
 
+(use-package lsp-tailwindcss)
+
 (use-package company
   :config
   (global-company-mode 1)
@@ -345,16 +347,35 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(css-indent-offset 2)
  '(custom-safe-themes
    '("8790269696322ff6821d75414c7d6ea8726d204cdeadedfd04c87b0c915296f7" default))
  '(display-line-numbers-type 'visual)
  '(helm-follow-mode-persistent t)
+ '(helm-minibuffer-history-key "M-p")
  '(helm-mode-fuzzy-match t)
+ '(js-indent-level 2)
+ '(js-paren-indent-offset 2)
+ '(js-square-indent-offset 2)
+ '(js-switch-indent-offset 2)
  '(markdown-command "/usr/bin/pandoc")
  '(neo-cwd-line-style 'text)
  '(neo-vc-integration '(face))
  '(package-selected-packages
-   '(evil-matchit evil-surround evil-goggles evil-magit evil-leader evil-numbers evil-visualstar evil-nerd-commenter yaml-mode use-package evil-collection))
+   '(
+    vue-mode
+    evil-collection
+    evil-goggles
+    evil-leader
+    evil-magit
+    evil-matchit
+    evil-nerd-commenter
+    evil-numbers
+    evil-surround
+    evil-visualstar
+    use-package
+    yaml-mode
+    ))
  '(require-final-newline nil)
  '(zoom-window-mode-line-color "DarkGreen"))
 
