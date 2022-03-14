@@ -27,7 +27,6 @@
          general
 	 editorconfig
          evil
-         evil-magit
          evil-matchit
          evil-leader
          evil-nerd-commenter
@@ -41,7 +40,6 @@
          helm-projectile
          lsp-mode
          lsp-ui
-         magit
          multi-term
          neotree
 	 pos-tip
@@ -136,7 +134,10 @@
      (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
      (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right))
   )
-(require 'evil-magit)
+
+;; Git support
+(use-package magit
+  :ensure t)
 
 ;; Git gutter configuration
 (global-git-gutter-mode +1)
@@ -166,6 +167,7 @@
 ;; Neotree configuration
 (setq neo-autorefresh nil)
 (global-set-key [f4] 'neotree-toggle)
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow 'nerd))
 (setq-default neo-show-hidden-files t)
 (setq neo-window-fixed-size nil)
 
