@@ -21,7 +21,6 @@
       (append
        '(
          all-the-icons
-         company-lsp
          company-mode
          company-quickhelp
          general
@@ -41,7 +40,6 @@
          lsp-mode
          lsp-ui
          multi-term
-         neotree
 	 pos-tip
          projectile
 	 rainbow-delimiters
@@ -223,11 +221,13 @@
   (editorconfig-mode 1))
 
 ;; Neotree configuration
-(setq neo-autorefresh nil)
-(global-set-key [f4] 'neotree-toggle)
-(setq neo-theme (if (display-graphic-p) 'icons 'arrow 'nerd))
-(setq-default neo-show-hidden-files t)
-(setq neo-window-fixed-size nil)
+(use-package neotree
+   :config
+   (setq neo-autorefresh nil)
+   (global-set-key [f4] 'neotree-toggle)
+   (setq neo-theme (if (display-graphic-p) 'icons 'arrow 'nerd))
+   (setq-default neo-show-hidden-files t)
+   (setq neo-window-fixed-size nil))
 
 (use-package flycheck
   :config
@@ -425,20 +425,7 @@
  '(neo-cwd-line-style 'text)
  '(neo-vc-integration '(face))
  '(package-selected-packages
-   '(
-    vue-mode
-    evil-collection
-    evil-goggles
-    evil-leader
-    evil-magit
-    evil-matchit
-    evil-nerd-commenter
-    evil-numbers
-    evil-surround
-    evil-visualstar
-    use-package
-    yaml-mode
-    ))
+   '(vue-mode evil-collection evil-goggles evil-leader evil-magit evil-matchit evil-nerd-commenter evil-numbers evil-surround evil-visualstar use-package yaml-mode))
  '(require-final-newline nil)
  '(zoom-window-mode-line-color "DarkGreen"))
 
