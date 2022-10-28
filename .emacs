@@ -218,7 +218,10 @@
 
 (use-package editorconfig
   :config
-  (editorconfig-mode 1))
+  (editorconfig-mode 1)
+  (add-hook 'editorconfig-after-apply-functions
+	    (lambda (props) (setq web-mode-block-padding 0)))
+  (setq lsp-enable-indentation nil))
 
 ;; Neotree configuration
 (use-package neotree
