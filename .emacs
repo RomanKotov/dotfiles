@@ -3,6 +3,13 @@
 (setq evil-want-keybinding nil)
 (setq evil-want-C-u-scroll t)
 
+;; Keybindings MacOS
+(when (eq system-type 'darwin)
+  (setq mac-option-key-is-meta nil
+      mac-command-key-is-meta t
+      mac-command-modifier 'meta
+      mac-option-modifier 'control))
+
 ;; Package management
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
@@ -25,7 +32,6 @@
          company-quickhelp
          general
 	 editorconfig
-         evil
          evil-matchit
          evil-leader
          evil-nerd-commenter
@@ -431,6 +437,7 @@
  '(package-selected-packages
    '(vue-mode evil-collection evil-goggles evil-leader evil-magit evil-matchit evil-nerd-commenter evil-numbers evil-surround evil-visualstar use-package yaml-mode))
  '(require-final-newline nil)
+ '(warning-suppress-log-types '((lsp-mode)))
  '(zoom-window-mode-line-color "DarkGreen"))
 
 (custom-set-faces
