@@ -1,7 +1,8 @@
-;; Proper evil startup
-(setq evil-want-integration nil)
-(setq evil-want-keybinding nil)
-(setq evil-want-C-u-scroll t)
+;;; .emacs --- My Emacs configuration
+;;; Commentary:
+;;; Setup my Emacs instance
+
+;;; Code:
 
 ;; Keybindings MacOS
 (when (eq system-type 'darwin)
@@ -10,81 +11,28 @@
       mac-command-modifier 'meta
       mac-option-modifier 'control))
 
-;; Package management
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-(el-get 'sync)
-
-;; Package list for el-get
-(setq required-packages
-      (append
-       '(
-         all-the-icons
-         company-mode
-         company-quickhelp
-         general
-	 editorconfig
-         evil-matchit
-         evil-leader
-         evil-nerd-commenter
-         evil-numbers
-         evil-surround
-         evil-visualstar
-         flycheck
-         git-gutter
-         helm
-         helm-ag
-         helm-projectile
-         lsp-mode
-         lsp-ui
-         multi-term
-	 pos-tip
-         projectile
-	 rainbow-delimiters
-	 rust-mode
-	 web-mode
-         which-key
-	 yasnippet
-	 yasnippet-snippets
-	 zoom-window
-         )
-       (mapcar 'el-get-as-symbol (mapcar 'el-get-source-name el-get-sources))))
-
-(el-get 'sync required-packages)
-
-;; Install packages from Elpa
 (require 'package)
-(require 'cl)
+(require 'cl-lib)
+(setq package-enable-at-startup nil)
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 
-;; Elpa package list
-(defvar elpa-packages '(use-package spacemacs-theme))
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
-(defun cfg:install-packages ()
-  (let ((pkgs (remove-if #'package-installed-p elpa-packages)))
-    (when pkgs
-      (message "%s" "Emacs refresh packages database...")
-      (package-refresh-contents)
-      (message "%s" " done.")
-      (dolist (p elpa-packages)
-        (package-install p)))))
+(eval-when-compile
+  (require 'use-package))
 
 (package-initialize)
 
-(cfg:install-packages)
-
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
+
+(use-package spacemacs-theme)
+(global-display-line-numbers-mode 1)
+(add-hook 'prog-mode-hook #'display-line-numbers-mode)
 
 (use-package spaceline
   :config
@@ -92,11 +40,6 @@
   (setq powerline-default-separator 'arrow-fade)
   (require 'spaceline-config)
   (spaceline-spacemacs-theme))
-
-(use-package linum-relative
-  :config
-  (setq linum-relative-backend 'display-line-numbers-mode)
-  (add-hook 'prog-mode-hook 'linum-relative-mode))
 
 (use-package eyebrowse
   :config
@@ -121,7 +64,7 @@
   :defer .1 ;; don't block emacs when starting, load evil immediately after startup
   :init
   (setq-default evil-cross-lines t)
-  (setq evil-want-integration nil) ;; required by evil-collection
+  (setq evil-want-integration t) ;; required by evil-collection
   (setq evil-want-keybinding nil)
   (setq evil-search-module 'evil-search)
   (setq evil-ex-complete-emacs-commands nil)
@@ -159,6 +102,9 @@
 
   ;; evil numbers
   (use-package evil-numbers)
+
+  ;; evil leader
+  (use-package evil-leader)
 
   ;; visual hints while editing
   (use-package evil-goggles
@@ -267,11 +213,15 @@
 			(lsp-enable-which-key-integration))))
   :config
   (define-key lsp-mode-map (kbd "M-l") lsp-command-map)
-  :init
-      (setq lsp-prefer-flymake nil ;; Prefer using lsp-ui (flycheck) over flymake.
-	    lsp-restart 'auto-restart)
-      (add-hook 'prog-mode-hook #'lsp)
-      (add-to-list 'exec-path "~/projects/elixir-ls/release"))
+  :init (setq lsp-prefer-flymake nil ;; Prefer using lsp-ui (flycheck) over flymake.
+	      lsp-restart 'auto-restart)
+  :hook (
+	 (elixir-mode . lsp)
+	 (web-mode . lsp)
+	 (css-mode . lsp)
+	 (js-mode . lsp)
+	 (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
 
 (use-package lsp-ui
   :requires lsp-mode flycheck
@@ -433,12 +383,7 @@
  '(js-switch-indent-offset 2)
  '(markdown-command "/usr/bin/pandoc")
  '(neo-cwd-line-style 'text)
- '(neo-vc-integration '(face))
- '(package-selected-packages
-   '(vue-mode evil-collection evil-goggles evil-leader evil-magit evil-matchit evil-nerd-commenter evil-numbers evil-surround evil-visualstar use-package yaml-mode))
- '(require-final-newline nil)
- '(warning-suppress-log-types '((lsp-mode)))
- '(zoom-window-mode-line-color "DarkGreen"))
+ '(neo-vc-integration '(face)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
