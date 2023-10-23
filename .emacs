@@ -6,7 +6,7 @@
 
 ;; Keybindings MacOS
 (when (eq system-type 'darwin)
-  (setq mac-option-key-is-meta nil
+  (setq-default mac-option-key-is-meta nil
       mac-command-key-is-meta t
       mac-command-modifier 'meta
       mac-option-modifier 'control))
@@ -56,7 +56,7 @@
 (use-package helm
   :config
   (helm-mode 1)
-  (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
+  (setq-default helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
   (global-set-key (kbd "M-x") 'helm-M-x))
 
 ;; Evil configuration
@@ -172,8 +172,8 @@
   :config
   (editorconfig-mode 1)
   (add-hook 'editorconfig-after-apply-functions
-	    (lambda (props) (setq web-mode-block-padding 0)))
-  (setq lsp-enable-indentation nil))
+	    (lambda (props) (setq-default web-mode-block-padding 0)))
+  (setq-default lsp-enable-indentation nil))
 
 ;; Neotree configuration
 (use-package neotree
@@ -213,7 +213,7 @@
 			(lsp-enable-which-key-integration))))
   :config
   (define-key lsp-mode-map (kbd "M-l") lsp-command-map)
-  :init (setq lsp-prefer-flymake nil ;; Prefer using lsp-ui (flycheck) over flymake.
+  :init (setq-default lsp-prefer-flymake nil ;; Prefer using lsp-ui (flycheck) over flymake.
 	      lsp-restart 'auto-restart)
   :hook (
 	 (elixir-mode . lsp)
@@ -226,7 +226,7 @@
 (use-package lsp-ui
   :requires lsp-mode flycheck
   :config
-  (setq lsp-ui-doc-enable t
+  (setq-default lsp-ui-doc-enable t
         lsp-ui-doc-use-childframe t
         lsp-ui-doc-position 'top
         lsp-ui-doc-include-signature t
@@ -344,7 +344,7 @@
   (add-hook 'erlang-mode-hook #'lsp))
 
 ;; General configuration
-(setq x-select-enable-clipboard t) ; clipboard integration
+(setq select-enable-clipboard t) ; clipboard integration
 (fset 'yes-or-no-p 'y-or-n-p) ;; change all prompts to y or n
 (show-paren-mode 1) ; highlight corresponding paren
 (setq-default word-wrap t) ; wrap words
