@@ -18,9 +18,30 @@
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+(setq-default treesit-language-source-alist
+	      '(
+		(bash "https://github.com/tree-sitter/tree-sitter-bash")
+		(cmake "https://github.com/uyha/tree-sitter-cmake")
+		(css "https://github.com/tree-sitter/tree-sitter-css")
+		(elisp "https://github.com/Wilfred/tree-sitter-elisp")
+		(elixir "https://github.com/elixir-lang/tree-sitter-elixir")
+		(heex "https://github.com/phoenixframework/tree-sitter-heex")
+		(html "https://github.com/tree-sitter/tree-sitter-html")
+		(javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+		(json "https://github.com/tree-sitter/tree-sitter-json")
+		(make "https://github.com/alemuller/tree-sitter-make")
+		(markdown "https://github.com/ikatyang/tree-sitter-markdown")
+		(python "https://github.com/tree-sitter/tree-sitter-python")
+		(toml "https://github.com/tree-sitter/tree-sitter-toml")
+		(tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+		(typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+		(yaml "https://github.com/ikatyang/tree-sitter-yaml")
+		)
+	      )
+
+ ;; Should use:
+ ;; (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
+ ;; at least once per installation or while changing this list
 
 (eval-when-compile
   (require 'use-package))
@@ -216,7 +237,6 @@
   :init (setq-default lsp-prefer-flymake nil ;; Prefer using lsp-ui (flycheck) over flymake.
 	      lsp-restart 'auto-restart)
   :hook (
-	 (elixir-mode . lsp)
 	 (web-mode . lsp)
 	 (css-mode . lsp)
 	 (js-mode . lsp)
@@ -302,7 +322,9 @@
   (tooltip-mode 1)
   (dap-ui-controls-mode 1))
 
-(use-package elixir-mode
+(use-package elixir-ts-mode
+  :hook
+  (elixir-ts-mode . lsp)
   :config
   (require 'dap-elixir)
   (defun dap-elixir--populate-start-file-args (conf)
