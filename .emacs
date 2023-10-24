@@ -18,7 +18,7 @@
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 
-(setq-default treesit-language-source-alist
+(defvar treesit-language-source-alist
 	      '(
 		(bash "https://github.com/tree-sitter/tree-sitter-bash")
 		(cmake "https://github.com/uyha/tree-sitter-cmake")
@@ -39,9 +39,20 @@
 		)
 	      )
 
- ;; Should use:
- ;; (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
- ;; at least once per installation or while changing this list
+;; General configuration
+(setq select-enable-clipboard t) ; clipboard integration
+(fset 'yes-or-no-p 'y-or-n-p) ;; change all prompts to y or n
+(show-paren-mode 1) ; highlight corresponding paren
+(setq-default word-wrap t) ; wrap words
+(setq inhibit-startup-screen t)
+
+(defun init-editor ()
+  "Initialize editor instance."
+  (all-the-icons-install-fonts)
+  (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist)))
+
+;; Should use after a fresh installation or changing treesitter options
+;; (init-editor)
 
 (eval-when-compile
   (require 'use-package))
@@ -365,12 +376,6 @@
   :config
   (add-hook 'erlang-mode-hook #'lsp))
 
-;; General configuration
-(setq select-enable-clipboard t) ; clipboard integration
-(fset 'yes-or-no-p 'y-or-n-p) ;; change all prompts to y or n
-(show-paren-mode 1) ; highlight corresponding paren
-(setq-default word-wrap t) ; wrap words
-(setq inhibit-startup-screen t)
 
 ; disable emacs heading
 (menu-bar-mode -1)
