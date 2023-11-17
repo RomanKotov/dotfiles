@@ -57,8 +57,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(backup-by-copying-when-linked t)
+ '(backup-directory-alist '((".*" . "~/.emacs.d/backup/per-save")))
  '(confirm-kill-emacs 'y-or-n-p)
  '(custom-enabled-themes '(leuven-dark))
+ '(delete-old-versions t)
  '(display-line-numbers-type 'relative)
  '(global-hl-line-mode t)
  '(global-visual-line-mode t)
@@ -68,9 +71,12 @@
  '(ido-use-url-at-point nil)
  '(inhibit-startup-screen t)
  '(isearch-allow-motion t)
+ '(kept-old-versions 2)
  '(line-move-visual t)
+ '(make-backup-files t)
  '(package-selected-packages '(git-gutter helm avy))
  '(repeat-mode t)
+ '(version-control t)
  '(winner-mode t))
 
 (custom-set-faces
