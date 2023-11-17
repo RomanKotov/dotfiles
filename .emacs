@@ -5,6 +5,52 @@
 
 ;;; Code:
 
+;; package configuration
+(require 'package)
+(setq package-enable-at-startup nil)
+(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+
+(eval-when-compile
+  (require 'use-package))
+
+(package-initialize)
+
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
+
+;; treesitter configuration
+(defvar treesit-language-source-alist
+  '(
+    (bash "https://github.com/tree-sitter/tree-sitter-bash")
+    (cmake "https://github.com/uyha/tree-sitter-cmake")
+    (css "https://github.com/tree-sitter/tree-sitter-css")
+    (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+    (elixir "https://github.com/elixir-lang/tree-sitter-elixir")
+    (erlang "https://github.com/WhatsApp/tree-sitter-erlang")
+    (heex "https://github.com/phoenixframework/tree-sitter-heex")
+    (html "https://github.com/tree-sitter/tree-sitter-html")
+    (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+    (json "https://github.com/tree-sitter/tree-sitter-json")
+    (make "https://github.com/alemuller/tree-sitter-make")
+    (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+    (python "https://github.com/tree-sitter/tree-sitter-python")
+    (toml "https://github.com/tree-sitter/tree-sitter-toml")
+    (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+    (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+    (yaml "https://github.com/ikatyang/tree-sitter-yaml")
+    )
+  )
+
+(defun install-treesitter-languages ()
+  (mapc
+   #'treesit-install-language-grammar
+   (mapcar #'car treesit-language-source-alist)))
+
+;; Should use after a fresh installation or changing treesitter options
+;; (install-treesitter-languages)
+
 ;; configuration
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -14,6 +60,7 @@
  '(confirm-kill-emacs 'y-or-n-p)
  '(custom-enabled-themes '(leuven-dark))
  '(display-line-numbers-type 'relative)
+ '(global-hl-line-mode t)
  '(global-visual-line-mode t)
  '(ido-enable-flex-matching t)
  '(ido-everywhere t)
@@ -22,8 +69,8 @@
  '(inhibit-startup-screen t)
  '(isearch-allow-motion t)
  '(line-move-visual t)
+ '(package-selected-packages '(git-gutter helm avy))
  '(repeat-mode t)
- '(use-package-always-ensure t)
  '(winner-mode t))
 
 (custom-set-faces
