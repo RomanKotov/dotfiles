@@ -1,4 +1,4 @@
-;;; .emacs --- My simple configuration
+;;; .emacs --- My simple cRSBHG4XFU06slA4k16SLml@github.com/onfiguration
 
 ;;; Commentary:
 ;; Simple configuration
@@ -150,6 +150,12 @@
 (defun sh-switch-to-process-buffer ()
   (interactive)
   (pop-to-buffer (process-buffer (get-process "*ansi-term*")) t))
+
+;; Keybindings MacOS
+(when (eq system-type 'darwin)
+  (setq-default
+   mac-option-modifier 'meta
+   mac-command-modifier 'super))
 
 ;; remap keys
 (global-set-key [remap list-buffers] 'ibuffer)
