@@ -74,7 +74,7 @@
  '(kept-old-versions 2)
  '(line-move-visual t)
  '(make-backup-files t)
- '(package-selected-packages '(git-gutter helm avy))
+ '(package-selected-packages '(avy eglot git-gutter helm))
  '(repeat-mode t)
  '(version-control t)
  '(winner-mode t))
@@ -88,7 +88,8 @@
 
 ; packages
 (use-package avy
-  :bind (("C-;" . avy-goto-char-timer)))
+  :bind (("C-;" . avy-goto-char-timer)
+	 ("M-g f" . avy-goto-line)))
 
 (use-package helm)
 
@@ -101,9 +102,57 @@
 	 ("C-c h r" . git-gutter:revert-hunk))
   :config (setq git-gutter:update-interval 0.02))
 
+(require 'term)
+(defun mp-term-custom-settings ()
+  (local-set-key (kbd "M-p") 'term-send-up)
+  (local-set-key (kbd "M-n") 'term-send-down))
+(add-hook 'term-load-hook #'mp-term-custom-settings)
+
+(define-key term-raw-map (kbd "M-o") 'other-window)
+(define-key term-raw-map (kbd "M-p") 'term-send-up)
+(define-key term-raw-map (kbd "M-n") 'term-send-down)
+
+(defun ansi-term-send-line-or-region (&optional step)
+  (interactive ())
+  (let ((proc (get-process "*ansi-term*"))
+         pbuf
+         min
+         max
+         command)
+    (unless proc
+      (let ((currbuff (current-buffer)))
+	(call-interactively #'ansi-term)
+        (switch-to-buffer currbuff)
+        (setq proc (get-process "*ansi-term*"))))
+
+    (setq pbuff (process-buffer proc))
+
+    (if (use-region-p)
+      (setq min (region-beginning)
+            max (region-end))
+      (setq min (point-at-bol)
+            max (point-at-eol)))
+
+    (setq command (concat (buffer-substring min max) "\n"))
+    (process-send-string proc command)
+    (display-buffer (process-buffer proc) t)
+    (when step
+      (goto-char max)
+      (next-line))))
+
+(defun sh-send-line-or-region-and-step ()
+  (interactive)
+  (ansi-term-send-line-or-region t))
+
+(defun sh-switch-to-process-buffer ()
+  (interactive)
+  (pop-to-buffer (process-buffer (get-process "*ansi-term*")) t))
+
 ;; remap keys
 (global-set-key [remap list-buffers] 'ibuffer)
 (global-set-key (kbd "M-o") 'other-window)
+(global-set-key (kbd "C-c e") 'sh-send-line-or-region-and-step)
+(global-set-key (kbd "C-c z") 'sh-switch-to-process-buffer)
 
 ;; Window movement
 (windmove-default-keybindings)
