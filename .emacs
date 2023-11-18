@@ -74,6 +74,7 @@
  '(kept-old-versions 2)
  '(line-move-visual t)
  '(make-backup-files t)
+ '(package-selected-packages nil)
  '(repeat-mode t)
  '(version-control t)
  '(winner-mode t))
