@@ -74,7 +74,9 @@
  '(kept-old-versions 2)
  '(line-move-visual t)
  '(make-backup-files t)
- '(package-selected-packages nil)
+ '(package-selected-packages
+   '(avy company company-mode company-quickhelp editorconfig eglot erlang
+	 git-gutter helm magit markdown-mode))
  '(repeat-mode t)
  '(version-control t)
  '(winner-mode t))
@@ -86,12 +88,36 @@
  ;; If there is more than one, they won't work right.
  )
 
+;; Configure file mode mapping
+(add-to-list 'auto-mode-alist '("\\.exs?\\'" . elixir-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.heex\\'" . heex-ts-mode))
+
 ; packages
 (use-package avy
   :bind (("C-;" . avy-goto-char-timer)
 	 ("M-g f" . avy-goto-line)))
 
-(use-package helm)
+(use-package company
+  :hook
+  (after-init . global-company-mode))
+
+(use-package company-quickhelp
+  :config (company-quickhelp-mode))
+
+(use-package editorconfig
+  :config
+  (editorconfig-mode 1))
+
+(use-package eglot
+  :hook
+  (elixir-ts-mode . eglot-ensure)
+  (erlang-mode . eglot-ensure)
+  (js-mode . eglot-ensure)
+  )
+
+(use-package elixir-ts-mode)
+
+(use-package erlang)
 
 (use-package git-gutter
   :hook (prog-mode . git-gutter-mode)
@@ -102,8 +128,12 @@
 	 ("C-c h r" . git-gutter:revert-hunk))
   :config (setq git-gutter:update-interval 0.02))
 
+(use-package helm)
+
 (use-package magit
   :bind ("C-x g" . magit-status))
+
+(use-package markdown-mode)
 
 ;; Terminal workarounds
 (require 'term)
@@ -172,6 +202,16 @@
 
 ;; confirmation prompts
 (fset 'yes-or-no-p 'y-or-n-p)
+
+;; remap modes
+(setq major-mode-remap-alist
+ '((yaml-mode . yaml-ts-mode)
+   (bash-mode . bash-ts-mode)
+   (js2-mode . js-ts-mode)
+   (typescript-mode . typescript-ts-mode)
+   (json-mode . json-ts-mode)
+   (css-mode . css-ts-mode)
+   (python-mode . python-ts-mode)))
 
 (provide '.emacs)
 
