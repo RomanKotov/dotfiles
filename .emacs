@@ -74,7 +74,6 @@
  '(kept-old-versions 2)
  '(line-move-visual t)
  '(make-backup-files t)
- '(package-selected-packages '(avy eglot git-gutter helm))
  '(repeat-mode t)
  '(version-control t)
  '(winner-mode t))
@@ -102,6 +101,10 @@
 	 ("C-c h r" . git-gutter:revert-hunk))
   :config (setq git-gutter:update-interval 0.02))
 
+(use-package magit
+  :bind ("C-x g" . magit-status))
+
+;; Terminal workarounds
 (require 'term)
 (defun mp-term-custom-settings ()
   (local-set-key (kbd "M-p") 'term-send-up)
