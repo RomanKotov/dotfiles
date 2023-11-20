@@ -1,4 +1,4 @@
-;;; .emacs --- My simple cRSBHG4XFU06slA4k16SLml@github.com/onfiguration
+;;; .emacs --- My simple configuration
 
 ;;; Commentary:
 ;; Simple configuration
