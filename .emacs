@@ -69,6 +69,7 @@
  '(ido-everywhere t)
  '(ido-use-filename-at-point 'guess)
  '(ido-use-url-at-point nil)
+ '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(isearch-allow-motion t)
  '(kept-old-versions 2)
@@ -76,7 +77,7 @@
  '(make-backup-files t)
  '(package-selected-packages
    '(avy company company-mode company-quickhelp editorconfig eglot erlang
-	 git-gutter helm magit markdown-mode))
+         git-gutter helm magit markdown-mode))
  '(repeat-mode t)
  '(version-control t)
  '(winner-mode t))
@@ -92,7 +93,7 @@
 (add-to-list 'auto-mode-alist '("\\.exs?\\'" . elixir-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.heex\\'" . heex-ts-mode))
 
-; packages
+;; packages
 (use-package avy
   :bind (("C-;" . avy-goto-char-timer)
 	 ("M-g f" . avy-goto-line)))
@@ -149,21 +150,21 @@
 (defun ansi-term-send-line-or-region (&optional step)
   (interactive ())
   (let ((proc (get-process "*ansi-term*"))
-         pbuf
-         min
-         max
-         command)
+        pbuf
+        min
+        max
+        command)
     (unless proc
       (let ((currbuff (current-buffer)))
-	(call-interactively #'ansi-term)
+        (call-interactively #'ansi-term)
         (switch-to-buffer currbuff)
         (setq proc (get-process "*ansi-term*"))))
 
     (setq pbuff (process-buffer proc))
 
     (if (use-region-p)
-      (setq min (region-beginning)
-            max (region-end))
+        (setq min (region-beginning)
+              max (region-end))
       (setq min (point-at-bol)
             max (point-at-eol)))
 
@@ -190,6 +191,7 @@
 
 ;; remap keys
 (global-set-key [remap list-buffers] 'ibuffer)
+(global-set-key [remap dabbrev-expand] 'hippie-expand)
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "C-c e") 'sh-send-line-or-region-and-step)
 (global-set-key (kbd "C-c z") 'sh-switch-to-process-buffer)
@@ -204,7 +206,8 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; remap modes
-(setq major-mode-remap-alist
+(setq
+ major-mode-remap-alist
  '((yaml-mode . yaml-ts-mode)
    (bash-mode . bash-ts-mode)
    (js2-mode . js-ts-mode)
