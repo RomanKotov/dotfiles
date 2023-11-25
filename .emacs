@@ -5,7 +5,7 @@
 
 ;;; Code:
 
-;; package configuration
+;; Package configuration
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
@@ -20,7 +20,7 @@
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
 
-;; treesitter configuration
+;; Treesitter configuration
 (defvar treesit-language-source-alist
   '(
     (bash "https://github.com/tree-sitter/tree-sitter-bash")
@@ -51,7 +51,7 @@
 ;; Should use after a fresh installation or changing treesitter options
 ;; (install-treesitter-languages)
 
-;; configuration
+;; Custom variables
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -93,7 +93,7 @@
 (add-to-list 'auto-mode-alist '("\\.exs?\\'" . elixir-ts-mode))
 (add-to-list 'auto-mode-alist '("\\.heex\\'" . heex-ts-mode))
 
-;; packages
+;; Packages
 (use-package avy
   :bind (("C-;" . avy-goto-char-timer)
 	 ("M-g l" . avy-goto-line)))
@@ -189,7 +189,7 @@
    mac-option-modifier 'meta
    mac-command-modifier 'super))
 
-;; remap keys
+;; Remap keys
 (global-set-key [remap list-buffers] 'ibuffer)
 (global-set-key [remap dabbrev-expand] 'hippie-expand)
 (global-set-key (kbd "M-o") 'other-window)
@@ -199,13 +199,13 @@
 ;; Window movement
 (windmove-default-keybindings)
 
-;; completion
+;; Completion
 (ido-mode 1)
 
-;; confirmation prompts
+;; Confirmation prompts
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; remap modes
+;; Remap modes
 (setq
  major-mode-remap-alist
  '((yaml-mode . yaml-ts-mode)
@@ -215,6 +215,15 @@
    (json-mode . json-ts-mode)
    (css-mode . css-ts-mode)
    (python-mode . python-ts-mode)))
+
+;; Custom commands
+(defun sudo ()
+  "Use TRAMP to `sudo' the current buffer."
+  (interactive)
+  (when buffer-file-name
+    (find-alternate-file
+     (concat "/sudo:root@localhost:"
+             buffer-file-name))))
 
 (provide '.emacs)
 
