@@ -96,7 +96,7 @@
 ;; packages
 (use-package avy
   :bind (("C-;" . avy-goto-char-timer)
-	 ("M-g f" . avy-goto-line)))
+	 ("M-g l" . avy-goto-line)))
 
 (use-package company
   :hook
