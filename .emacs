@@ -216,6 +216,9 @@
    (css-mode . css-ts-mode)
    (python-mode . python-ts-mode)))
 
+;; Dired configuration
+(require 'dired-x)
+
 ;; Custom commands
 (defun sudo ()
   "Use TRAMP to `sudo' the current buffer."
