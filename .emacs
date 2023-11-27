@@ -44,6 +44,7 @@
   )
 
 (defun install-treesitter-languages ()
+  "Install treesitter language grammars."
   (mapc
    #'treesit-install-language-grammar
    (mapcar #'car treesit-language-source-alist)))
@@ -156,6 +157,7 @@
 ;; Terminal workarounds
 (require 'term)
 (defun mp-term-custom-settings ()
+  "Customize keybindings for term."
   (local-set-key (kbd "M-p") 'term-send-up)
   (local-set-key (kbd "M-n") 'term-send-down))
 (add-hook 'term-load-hook #'mp-term-custom-settings)
@@ -165,6 +167,7 @@
 (define-key term-raw-map (kbd "M-n") 'term-send-down)
 
 (defun ansi-term-send-line-or-region (&optional step)
+  "Send line or region to the shell, and scroll to the end if STEP is true."
   (interactive ())
   (let ((proc (get-process "*ansi-term*"))
         pbuf
@@ -193,10 +196,12 @@
       (next-line))))
 
 (defun sh-send-line-or-region-and-step ()
+  "Send a region to the terminal and jump to the end."
   (interactive)
   (ansi-term-send-line-or-region t))
 
 (defun sh-switch-to-process-buffer ()
+  "Switch to the terminal."
   (interactive)
   (pop-to-buffer (process-buffer (get-process "*ansi-term*")) t))
 
