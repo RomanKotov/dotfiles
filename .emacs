@@ -76,8 +76,9 @@
  '(line-move-visual t)
  '(make-backup-files t)
  '(package-selected-packages
-   '(avy company company-mode company-quickhelp editorconfig eglot erlang
-         git-gutter helm magit markdown-mode))
+   '(avy company company-mode company-quickhelp editorconfig
+         eglot erlang flycheck git-gutter helm magit markdown-mode
+         multiple-cursors yasnippet yasnippet-snippets))
  '(repeat-mode t)
  '(version-control t)
  '(winner-mode t))
@@ -120,6 +121,9 @@
 
 (use-package erlang)
 
+(use-package flycheck
+  :init (global-flycheck-mode))
+
 (use-package git-gutter
   :hook (prog-mode . git-gutter-mode)
   :bind (("C-c h n" . git-gutter:next-hunk)
@@ -135,6 +139,19 @@
   :bind ("C-x g" . magit-status))
 
 (use-package markdown-mode)
+
+(use-package multiple-cursors
+  :bind (("C->" . mc/mark-next-like-this)
+         ("C-<" . mc/mark-previous-like-this)
+         ("C-c C-<" . mc/mark-all-like-this)))
+
+(use-package yasnippet
+  :bind (:map yas-minor-mode-map
+              ("TAB" . nil)
+              ("<tab>" . nil)
+              ("C-c & e" . yas-expand))
+  :config (use-package yasnippet-snippets)
+  :init (yas-global-mode))
 
 ;; Terminal workarounds
 (require 'term)
