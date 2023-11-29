@@ -214,6 +214,8 @@
 ;; Remap keys
 (global-set-key [remap list-buffers] 'ibuffer)
 (global-set-key [remap dabbrev-expand] 'hippie-expand)
+(global-set-key (kbd "C-<return>") (kbd "C-e C-m TAB"))
+(global-set-key (kbd "M-<return>") (kbd "C-a C-m C-p TAB"))
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "C-c e") 'sh-send-line-or-region-and-step)
 (global-set-key (kbd "C-c z") 'sh-switch-to-process-buffer)
