@@ -171,16 +171,16 @@
 (defun ansi-term-send-line-or-region (&optional step)
   "Send line or region to the shell, and scroll to the end if STEP is true."
   (interactive ())
-  (let ((proc (get-process "*ansi-term*"))
+  (let ((proc (get-process "vterm"))
         pbuf
         min
         max
         command)
     (unless proc
       (let ((currbuff (current-buffer)))
-        (call-interactively #'ansi-term)
+        (vterm)
         (switch-to-buffer currbuff)
-        (setq proc (get-process "*ansi-term*"))))
+        (setq proc (get-process "vterm"))))
 
     (setq pbuff (process-buffer proc))
 
@@ -205,7 +205,7 @@
 (defun sh-switch-to-process-buffer ()
   "Switch to the terminal."
   (interactive)
-  (pop-to-buffer (process-buffer (get-process "*ansi-term*")) t))
+  (pop-to-buffer (process-buffer (get-process "vterm")) t))
 
 ;; Keybindings MacOS
 (when (eq system-type 'darwin)
