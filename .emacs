@@ -79,7 +79,7 @@
  '(package-selected-packages
    '(avy company company-mode company-quickhelp editorconfig
          eglot erlang flycheck git-gutter helm magit markdown-mode
-         multiple-cursors yasnippet yasnippet-snippets))
+         multiple-cursors vterm yasnippet yasnippet-snippets))
  '(repeat-mode t)
  '(version-control t)
  '(winner-mode t))
@@ -145,6 +145,8 @@
   :bind (("C->" . mc/mark-next-like-this)
          ("C-<" . mc/mark-previous-like-this)
          ("C-c C-<" . mc/mark-all-like-this)))
+
+(use-package vterm)
 
 (use-package yasnippet
   :bind (:map yas-minor-mode-map
