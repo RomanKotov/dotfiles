@@ -127,11 +127,14 @@
 
 (use-package git-gutter
   :hook (prog-mode . git-gutter-mode)
-  :bind (("C-c h n" . git-gutter:next-hunk)
-	 ("C-c h p" . git-gutter:previous-hunk)
-	 ("C-c h s" . git-gutter:stage-hunk)
-	 ("C-c h v" . git-gutter:popup-hunk)
-	 ("C-c h r" . git-gutter:revert-hunk))
+  :bind
+  (:repeat-map my/git-gutter-repeat-map
+               ("n" . git-gutter:next-hunk)
+	       ("p" . git-gutter:previous-hunk)
+	       ("s" . git-gutter:stage-hunk)
+	       ("v" . git-gutter:popup-hunk)
+	       ("r" . git-gutter:revert-hunk))
+  :bind-keymap ("C-c g" . my/git-gutter-repeat-map)
   :config (setq git-gutter:update-interval 0.02))
 
 (use-package helm)
@@ -142,9 +145,18 @@
 (use-package markdown-mode)
 
 (use-package multiple-cursors
-  :bind (("C->" . mc/mark-next-like-this)
-         ("C-<" . mc/mark-previous-like-this)
-         ("C-c C-<" . mc/mark-all-like-this)))
+  :bind
+  (:repeat-map my/mc-repeat-map
+               ("w" . mc/mark-next-like-this-word)
+               ("W" . mc/mark-previous-like-this-word)
+               ("s" . mc/mark-next-like-this-word)
+               ("S" . mc/mark-previous-like-this-word)
+               ("a" . mc/mark-all-like-this)
+               ("A" . mc/edit-ends-of-lines)
+               ("I" . mc/edit-beginnings-of-lines)
+               ("e" . mc/mark-more-like-this-extended)
+               ("L" . mc/edit-lines))
+  :bind-keymap ("C-c m" . my/mc-repeat-map))
 
 (use-package vterm)
 
