@@ -168,19 +168,32 @@
   :config (use-package yasnippet-snippets)
   :init (yas-global-mode))
 
-;; Terminal workarounds
-(require 'term)
-(defun mp-term-custom-settings ()
-  "Customize keybindings for term."
-  (local-set-key (kbd "M-p") 'term-send-up)
-  (local-set-key (kbd "M-n") 'term-send-down))
-(add-hook 'term-load-hook #'mp-term-custom-settings)
+(use-package window
+  :ensure nil
+  :bind
+  (:repeat-map my/window-repeat-map
+               ("o" . other-window)
+               ("h" . windmove-left)
+               ("l" . windmove-right)
+               ("j" . windmove-down)
+               ("k" . windmove-up)
+               ("K" . enlarge-window)
+               ("J" . shrink-window)
+               ("H" . enlarge-window-horizontally)
+               ("L" . shrink-window-horizontally)
+               ("=" . balance-windows)
+               ("-" . split-window-vertically)
+               ("|" . split-window-horizontally)
+               ("0" . delete-window)
+               ("1" . delete-other-windows)
+               ("u" . winner-undo)
+               ("<down>" . windmove-swap-states-down)
+               ("<up>" . windmove-swap-states-up)
+               ("<left>" . windmove-swap-states-left)
+               ("<right>" . windmove-swap-states-right))
+  :bind-keymap ("C-c w" . my/window-repeat-map))
 
-(define-key term-raw-map (kbd "M-o") 'other-window)
-(define-key term-raw-map (kbd "M-p") 'term-send-up)
-(define-key term-raw-map (kbd "M-n") 'term-send-down)
-
-(defun ansi-term-send-line-or-region (&optional step)
+(defun vterm-send-line-or-region (&optional step)
   "Send line or region to the shell, and scroll to the end if STEP is true."
   (interactive ())
   (let ((proc (get-process "vterm"))
@@ -212,7 +225,7 @@
 (defun sh-send-line-or-region-and-step ()
   "Send a region to the terminal and jump to the end."
   (interactive)
-  (ansi-term-send-line-or-region t))
+  (vterm-send-line-or-region t))
 
 (defun sh-switch-to-process-buffer ()
   "Switch to the terminal."
@@ -230,7 +243,6 @@
 (global-set-key [remap dabbrev-expand] 'hippie-expand)
 (global-set-key (kbd "C-<return>") (kbd "C-e C-m TAB"))
 (global-set-key (kbd "M-<return>") (kbd "C-a C-m C-p TAB"))
-(global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "C-c e") 'sh-send-line-or-region-and-step)
 (global-set-key (kbd "C-c z") 'sh-switch-to-process-buffer)
 
