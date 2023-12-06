@@ -43,14 +43,11 @@
     )
   )
 
-(defun install-treesitter-languages ()
+(defun my/install-treesitter-languages ()
   "Install treesitter language grammars."
   (mapc
    #'treesit-install-language-grammar
    (mapcar #'car treesit-language-source-alist)))
-
-;; Should use after a fresh installation or changing treesitter options
-;; (install-treesitter-languages)
 
 ;; Custom variables
 (custom-set-variables
@@ -101,22 +98,19 @@
 	 ("M-g l" . avy-goto-line)))
 
 (use-package company
-  :hook
-  (after-init . global-company-mode))
+  :hook (after-init . global-company-mode))
 
 (use-package company-quickhelp
   :config (company-quickhelp-mode))
 
 (use-package editorconfig
-  :config
-  (editorconfig-mode 1))
+  :config (editorconfig-mode 1))
 
 (use-package eglot
   :hook
   (elixir-ts-mode . eglot-ensure)
   (erlang-mode . eglot-ensure)
-  (js-mode . eglot-ensure)
-  )
+  (js-mode . eglot-ensure))
 
 (use-package elixir-ts-mode)
 
