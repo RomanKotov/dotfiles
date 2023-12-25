@@ -239,6 +239,10 @@
 (global-set-key (kbd "M-O") (kbd "C-a C-m C-p TAB"))
 (global-set-key (kbd "C-c e") 'sh-send-line-or-region-and-step)
 (global-set-key (kbd "C-c z") 'sh-switch-to-process-buffer)
+(global-set-key (kbd "M-s-b") 'windmove-left)
+(global-set-key (kbd "M-s-f") 'windmove-right)
+(global-set-key (kbd "M-s-p") 'windmove-up)
+(global-set-key (kbd "M-s-n") 'windmove-down)
 
 ;; Window movement
 (windmove-default-keybindings)
