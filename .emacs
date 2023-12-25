@@ -242,7 +242,8 @@
 (global-set-key (kbd "M-s-b") 'windmove-left)
 (global-set-key (kbd "M-s-f") 'windmove-right)
 (global-set-key (kbd "M-s-p") 'windmove-up)
-(global-set-key (kbd "M-s-n") 'windmove-down)
+(global-set-key (kbd "M-s-h") 'windmove-left)
+(global-set-key (kbd "M-s-o") 'other-window)
 
 ;; Window movement
 (windmove-default-keybindings)
