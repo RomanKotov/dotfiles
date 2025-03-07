@@ -2,6 +2,13 @@
 
 DOT_FILES=`git ls-files | grep -E "^\."`
 
+FOLDERS=(~/.config/nvim)
+
+for folder in $FOLDERS; do
+  echo "Creating $folder"
+  mkdir -p $folder
+done
+
 for file in $DOT_FILES; do
   echo "Processing $file"
 
