@@ -112,7 +112,7 @@ require("lazy").setup({
         },
       },
       -- colorscheme that will be used when installing plugins.
-      install = { colorscheme = { "habamax" } },
+      install = { colorscheme = { "evening" } },
       -- automatically check for plugin updates
       checker = { enabled = true },
     })
@@ -122,6 +122,7 @@ vim.cmd("set relativenumber")
 vim.cmd("set numberwidth=4")
 vim.cmd("set cursorline")
 vim.cmd("language en_US")
+vim.cmd("colorscheme evening")
 
 -- Editing section
 vim.cmd("set incsearch")
