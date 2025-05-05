@@ -116,6 +116,11 @@ vim.cmd("set hlsearch")
 vim.cmd("set ignorecase")
 vim.cmd("set infercase")
 
+-- Netrw section
+vim.cmd("let g:netrw_liststyle=3") -- tree-node by derault
+vim.cmd("let g:netrw_preview=1") -- vertical preview
+vim.cmd("let g:netrw_browse_split=4") -- open file in previous buffer
+
 ---
 -- LSP setup
 ---
