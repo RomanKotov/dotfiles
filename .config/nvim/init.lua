@@ -119,7 +119,7 @@ vim.cmd("set infercase")
 -- Netrw section
 vim.cmd("let g:netrw_liststyle=3") -- tree-node by derault
 vim.cmd("let g:netrw_preview=1") -- vertical preview
-vim.cmd("let g:netrw_browse_split=4") -- open file in previous buffer
+-- vim.cmd("let g:netrw_browse_split=4") -- open file in previous buffer
 
 ---
 -- LSP setup
@@ -155,6 +155,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
     vim.keymap.set({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
     vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+    vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float(0, {scope="line"})<cr>', opts)
   end,
 })
 
@@ -202,6 +203,8 @@ vim.diagnostic.config({
     severity_sort = false,
     float = true,
   })
+
+
 
 ---
 -- GIT config
