@@ -37,7 +37,16 @@ require("lazy").setup({
       },
       { 
 	"junegunn/fzf.vim",
-         dependencies = { "junegunn/fzf" }
+         dependencies = { "junegunn/fzf" },
+         config = function() 
+           local wk = require("which-key")
+           wk.add({
+             { "<leader>f", group = "+fzf" },
+             { "<leader>ff", "<cmd>Files<CR>",  desc = "find file", mode = "n" },
+             { "<leader>fg", "<cmd>GFiles<CR>",  desc = "git files", mode = "n" },
+             { "<leader>fr", "<cmd>RG<CR>",  desc = "interactive rg", mode = "n" },
+           })
+        end
       },
       -- Language Support
       {
@@ -147,19 +156,20 @@ lspconfig_defaults.capabilities = vim.tbl_deep_extend(
 -- if there is a language server active in the file
 vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
-  callback = function(event)
-    local opts = {buffer = event.buf}
-
-    vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-    vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-    vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
-    vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
-    vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
-    vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
-    vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-    vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-    vim.keymap.set({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
-    vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+  callback = function()
+    local wk = require('which-key')
+    wk.add({
+      {'K', '<cmd>lua vim.lsp.buf.hover()<cr>', desc = 'show docs', mode = 'n' },
+      {'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', desc = 'go to definition', mode = 'n' },
+      {'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', desc = 'go to declaration', mode = 'n' },
+      {'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', desc = 'go to implementation', mode = 'n' },
+      {'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', desc = 'go to type definition', mode = 'n' },
+      {'gr', '<cmd>lua vim.lsp.buf.references()<cr>', desc = 'show references', mode = 'n' },
+      {'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', desc = 'signature help', mode = 'n' },
+      {'<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', desc = 'rename symbol', mode = 'n' },
+      {'<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', desc = 'format file', mode = {'n', 'x'} },
+      {'<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', desc = 'code action', mode = 'n' },
+    })
   end,
 })
 
@@ -216,15 +226,17 @@ vim.diagnostic.config({
 require('gitsigns').setup {
   on_attach = function(bufnr) 
     local gitsigns = require('gitsigns')
+    local wk = require('which-key')
 
-		local function map(mode, l, r, opts)
-      opts = opts or {}
-      opts.buffer = bufnr
-      vim.keymap.set(mode, l, r, opts)
+    wk.add({ "<leader>h", group = "+hunks" })
+    wk.add({ "<leader>ht", group = "toggle" })
+
+    local function map(mode, l, desc, r)
+      wk.add({ l, r, mode = mode, desc = desc })
     end
 
 -- Navigation
-    map('n', ']c', function()
+    map('n', ']c', 'next hunk', function()
       if vim.wo.diff then
         vim.cmd.normal({']c', bang = true})
       else
@@ -232,7 +244,7 @@ require('gitsigns').setup {
       end
     end)
 
-    map('n', '[c', function()
+    map('n', '[c', 'previous hunk', function()
       if vim.wo.diff then
         vim.cmd.normal({'[c', bang = true})
       else
@@ -241,40 +253,40 @@ require('gitsigns').setup {
     end)
 
     -- Actions
-    map('n', '<leader>hs', gitsigns.stage_hunk)
-    map('n', '<leader>hr', gitsigns.reset_hunk)
+    map('n', '<leader>hs', 'stage hunk', gitsigns.stage_hunk)
+    map('n', '<leader>hr', 'reset hunk', gitsigns.reset_hunk)
 
-    map('v', '<leader>hs', function()
+    map('v', '<leader>hs', 'stage hunk', function()
       gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
     end)
 
-    map('v', '<leader>hr', function()
+    map('v', '<leader>hr', 'reset hunk', function()
       gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
     end)
 
-    map('n', '<leader>hS', gitsigns.stage_buffer)
-    map('n', '<leader>hR', gitsigns.reset_buffer)
-    map('n', '<leader>hp', gitsigns.preview_hunk)
-    map('n', '<leader>hi', gitsigns.preview_hunk_inline)
+    map('n', '<leader>hS', 'stage buffer', gitsigns.stage_buffer)
+    map('n', '<leader>hR', 'reset buffer', gitsigns.reset_buffer)
+    map('n', '<leader>hp', 'preview', gitsigns.preview_hunk)
+    map('n', '<leader>hi', 'preview inline', gitsigns.preview_hunk_inline)
 
-    map('n', '<leader>hb', function()
+    map('n', '<leader>hb', 'blame', function()
       gitsigns.blame_line({ full = true })
     end)
 
-    map('n', '<leader>hd', gitsigns.diffthis)
+    map('n', '<leader>hd', 'diff', gitsigns.diffthis)
 
-    map('n', '<leader>hD', function()
+    map('n', '<leader>hD', 'diff parent', function()
       gitsigns.diffthis('~')
     end)
 
-    map('n', '<leader>hQ', function() gitsigns.setqflist('all') end)
-    map('n', '<leader>hq', gitsigns.setqflist)
+    map('n', '<leader>hQ', '', function() gitsigns.setqflist('all') end)
+    map('n', '<leader>hq', '', gitsigns.setqflist)
 
     -- Toggles
-    map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
-    map('n', '<leader>tw', gitsigns.toggle_word_diff)
+    map('n', '<leader>htb', 'current line blame', gitsigns.toggle_current_line_blame)
+    map('n', '<leader>htw', 'word diff', gitsigns.toggle_word_diff)
 
     -- Text object
-    map({'o', 'x'}, 'ih', gitsigns.select_hunk)
+    map({'o', 'x'}, 'ih', 'hunk', gitsigns.select_hunk)
   end
 }
