@@ -35,6 +35,10 @@ require("lazy").setup({
           vim.g.tmux_navigator_disable_when_zoomed = 1
         end
       },
+      { 
+	"junegunn/fzf.vim",
+         dependencies = { "junegunn/fzf" }
+      },
       -- Language Support
       {
         "nvim-treesitter/nvim-treesitter",
