@@ -96,6 +96,7 @@ require("lazy").setup({
 
       -- GIT Support
       {'lewis6991/gitsigns.nvim'},
+      {'tpope/vim-fugitive'},
     },
     -- colorscheme that will be used when installing plugins.
     install = { colorscheme = { "evening" } },
@@ -155,7 +156,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
     vim.keymap.set({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
     vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
-    vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float(0, {scope="line"})<cr>', opts)
   end,
 })
 
@@ -274,4 +274,3 @@ require('gitsigns').setup {
     map({'o', 'x'}, 'ih', gitsigns.select_hunk)
   end
 }
-
