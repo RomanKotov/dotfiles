@@ -27,6 +27,22 @@ require("lazy").setup({
       "nelstrom/vim-visual-star-search",
       "tpope/vim-surround",
       {
+        "ggandor/leap.nvim",
+        config = function()
+          local wk = require("which-key")
+          wk.add({
+            { "<leader>j", group = "+jump", mode = { "n", "v", "o" } },
+            { "<leader>jj", "<Plug>(leap)",  desc = "current window", mode = { "n", "v", "o" } },
+            { "<leader>ja", "<Plug>(leap-anywhere)",  desc = "anywhere", mode = "n" },
+            { "<leader>jo", "<Plug>(leap-from-window)",  desc = "other window", mode = "n" },
+            { "<leader>jf", "<Plug>(leap-forward)",  desc = "forward", mode = { "n", "v", "o" } },
+            { "<leader>jF", "<Plug>(leap-backward)",  desc = "backward", mode = { "n", "v", "o"} },
+            { "<leader>jt", "<Plug>(leap-forward-till)",  desc = "forward-till", mode = { "n", "v", "o"} },
+            { "<leader>jT", "<Plug>(leap-backward-till)",  desc = "backward-till", mode = { "n", "v", "o"} },
+          })
+        end
+      },
+      {
         "christoomey/vim-tmux-navigator",
         init = function() 
           -- Use tmux-navigator mappings
@@ -37,15 +53,15 @@ require("lazy").setup({
       },
       { 
 	"junegunn/fzf.vim",
-         dependencies = { "junegunn/fzf" },
-         config = function() 
-           local wk = require("which-key")
-           wk.add({
-             { "<leader>f", group = "+fzf" },
-             { "<leader>ff", "<cmd>Files<CR>",  desc = "find file", mode = "n" },
-             { "<leader>fg", "<cmd>GFiles<CR>",  desc = "git files", mode = "n" },
-             { "<leader>fr", "<cmd>RG<CR>",  desc = "interactive rg", mode = "n" },
-           })
+        dependencies = { "junegunn/fzf" },
+        config = function() 
+          local wk = require("which-key")
+          wk.add({
+            { "<leader>f", group = "+fzf" },
+            { "<leader>ff", "<cmd>Files<CR>",  desc = "find file", mode = "n" },
+            { "<leader>fg", "<cmd>GFiles<CR>",  desc = "git files", mode = "n" },
+            { "<leader>fr", "<cmd>RG<CR>",  desc = "interactive rg", mode = "n" },
+          })
         end
       },
       -- Language Support
@@ -228,8 +244,8 @@ require('gitsigns').setup {
     local gitsigns = require('gitsigns')
     local wk = require('which-key')
 
-    wk.add({ "<leader>h", group = "+hunks" })
-    wk.add({ "<leader>ht", group = "toggle" })
+    wk.add({ "<leader>h", group = "+hunks", mode = { "n", "v" } })
+    wk.add({ "<leader>ht", group = "+toggle" })
 
     local function map(mode, l, desc, r)
       wk.add({ l, r, mode = mode, desc = desc })
