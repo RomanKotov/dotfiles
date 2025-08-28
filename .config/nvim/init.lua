@@ -24,8 +24,16 @@ vim.g.maplocalleader = "\\"
 require("lazy").setup({
     spec = {
       "folke/which-key.nvim",
-      "nelstrom/vim-visual-star-search",
       "tpope/vim-surround",
+      { 
+        "nelstrom/vim-visual-star-search",
+        config = function()
+          local wk = require("which-key")
+          wk.add({
+            { "<leader>*", desc = "search", mode = { "n" } },
+          })
+        end
+      },
       {
         "ggandor/leap.nvim",
         config = function()
@@ -59,6 +67,7 @@ require("lazy").setup({
           wk.add({
             { "<leader>f", group = "+fzf" },
             { "<leader>ff", "<cmd>Files<CR>",  desc = "find file", mode = "n" },
+            { "<leader>fb", "<cmd>Buffers<CR>",  desc = "find buffers", mode = "n" },
             { "<leader>fg", "<cmd>GFiles<CR>",  desc = "git files", mode = "n" },
             { "<leader>fr", "<cmd>RG<CR>",  desc = "interactive rg", mode = "n" },
           })
