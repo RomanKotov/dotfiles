@@ -304,8 +304,8 @@ require('gitsigns').setup {
       gitsigns.diffthis('~')
     end)
 
-    map('n', '<leader>hQ', '', function() gitsigns.setqflist('all') end)
-    map('n', '<leader>hq', '', gitsigns.setqflist)
+    map('n', '<leader>hQ', 'populate locations all', function() gitsigns.setqflist('all') end)
+    map('n', '<leader>hq', 'populate locations', gitsigns.setqflist)
 
     -- Toggles
     map('n', '<leader>htb', 'current line blame', gitsigns.toggle_current_line_blame)
