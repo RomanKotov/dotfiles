@@ -1,5 +1,5 @@
-let current_compiler = "competitive-g++"
-CompilerSet makeprg=g++\ -lm\ -pipe\ -std=c++17\ -g\ %
+let current_compiler = "study-gcc"
+CompilerSet makeprg=gcc\ -g\ -Werror-implicit-function-declaration\ -Wall\ %
 
 CompilerSet errorformat=
       \%*[^\"]\"%f\"%*\\D%l:%c:\ %m,
