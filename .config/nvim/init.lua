@@ -146,7 +146,7 @@ require("lazy").setup({
 vim.cmd("set relativenumber")
 vim.cmd("set numberwidth=4")
 vim.cmd("set cursorline")
-vim.cmd("language en_US")
+vim.cmd("language en_US.UTF-8")
 vim.cmd("colorscheme evening")
 
 -- Editing section
