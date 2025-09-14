@@ -135,6 +135,19 @@ require("lazy").setup({
       -- GIT Support
       {'lewis6991/gitsigns.nvim'},
       {'tpope/vim-fugitive'},
+
+      -- UI configuration
+      {
+        'nvim-lualine/lualine.nvim',
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        config = function()
+          require("lualine").setup {
+            options = {
+              theme = "powerline_dark"
+            },
+          }
+        end,
+      },
     },
     -- colorscheme that will be used when installing plugins.
     install = { colorscheme = { "evening" } },
