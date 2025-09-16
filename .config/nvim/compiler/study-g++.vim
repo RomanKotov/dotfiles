@@ -1,5 +1,5 @@
 let current_compiler = "study-g++"
-CompilerSet makeprg=g++\ -lm\ -pipe\ -std=c++17\ -g\ %
+CompilerSet makeprg=g++\ -g\ -O0\ -Werror-implicit-function-declaration\ -Wall\ -lm\ -pipe\ -std=c++17\ -g\ %
 
 CompilerSet errorformat=
       \%*[^\"]\"%f\"%*\\D%l:%c:\ %m,

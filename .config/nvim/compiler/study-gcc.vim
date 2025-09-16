@@ -1,5 +1,5 @@
 let current_compiler = "study-gcc"
-CompilerSet makeprg=gcc\ -g\ -O0\ -Werror-implicit-function-declaration\ -Wall\ %
+CompilerSet makeprg=gcc\ -g\ -O0\ -Werror-implicit-function-declaration\ -Wall\ %\ -lm
 
 CompilerSet errorformat=
       \%*[^\"]\"%f\"%*\\D%l:%c:\ %m,
