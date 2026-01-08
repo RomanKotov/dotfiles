@@ -76,6 +76,7 @@ require("lazy").setup({
       -- Language Support
       {
         "nvim-treesitter/nvim-treesitter",
+        branch = "master",
         build = ":TSUpdate",
         event = { "VeryLazy" },
         init = function(plugin)
