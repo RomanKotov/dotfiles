@@ -35,7 +35,7 @@ require("lazy").setup({
         end
       },
       {
-        "ggandor/leap.nvim",
+        url = "https://codeberg.org/andyg/leap.nvim",
         config = function()
           local wk = require("which-key")
           wk.add({
